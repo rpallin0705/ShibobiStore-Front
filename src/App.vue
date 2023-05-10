@@ -1,26 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <!-- <MainHeader></MainHeader>
+  <MainSlider></MainSlider>
+  <MainStore></MainStore> 
+  HomePage></HomePage>
+  
+  <StorePage></StorePage>-->
+  <MainHeader></MainHeader>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MainHeader from "./components/MainHeader.vue";
+/*import MainSlider from './components/MainSlider.vue';
+import MainStore from "./components/MainStore.vue";*/
+//import HomePage from "./components/HomePage.vue";
+//import StorePage from './components/StorePage.vue';
+//import SearchItem from './components/SearchItem.vue';
 export default {
-  name: 'App',
+  name: "app",
   components: {
-    HelloWorld
-  }
-}
+    /*MainHeader,
+    MainSlider,
+    MainStore
+    HomePage
+    StorePage,*/
+    MainHeader
+    
+},
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style> @import './assets/main.css';
 </style>
