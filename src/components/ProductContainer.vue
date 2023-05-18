@@ -9,26 +9,27 @@
 </template>
 
 <script>
-import { juegos } from '../main.js'
 
 export default {
   name: 'ProductContainer',
-  mounted() {
-    console.log(this.juegos[0].nombre);
-  }
+
 }
 
 </script>
+
+
+
 <style scoped>
 .product {
-  width: 40%;
+  width: 30%;
   background: rgba(0, 0, 0, 0.583);
-  display: flex;
+  display: none;
   flex-direction: column;
   color: white;
-  margin: 30px;
+  margin: 10px;
   border-radius: 10px;
   transition: 0.3s all;
+  overflow-x: hidden;
 }
 
 .product img {
