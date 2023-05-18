@@ -1,58 +1,68 @@
 <template>
-    <div class="content">
-      <img src="../assets/btf4.jpg">
-      <h3>Battlefield 4</h3>
-      <p>60$</p>
+  <div class="product">
+    <img src="../assets/btf4.jpg" alt="Nombre del juego" class="product-image">
+    <div class="info">
+      <h2 class="product-title"></h2>
+      <p><span class="old-price">60$</span><span class="discount">30%</span><span class="new-price">40$</span></p>
     </div>
-  
+  </div>
 </template>
 
 <script>
+import { juegos } from '../main.js'
+
 export default {
-  name: 'ProductContainer'
+  name: 'ProductContainer',
+  mounted() {
+    console.log(this.juegos[0].nombre);
+  }
 }
+
 </script>
 <style scoped>
-.content {
-  width: 30%;
-  margin: 20px;
-  box-sizing: border-box;
-  float: left;
-  text-align: center;
-  border-radius: 20px;
-  cursor: pointer;
-  padding-top: 10px;
-  transition: .4s;
-  color: #fff;
-  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.829);
+.product {
+  width: 40%;
+  background: rgba(0, 0, 0, 0.583);
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin: 30px;
+  border-radius: 10px;
+  transition: 0.3s all;
+}
+
+.product img {
+  border-radius: 10px;
+}
+
+.info {
+  padding: 15px;
+}
+
+p {
+  margin-top: 10px;
+}
+
+.old-price {
+  text-decoration: line-through orange;
   font-size: 20px;
-
 }
 
-.content:hover {
+.discount {
+  font-size: 30px;
+  color: orange;
+}
 
+.new-price {
+  font-size: 30px;
+  color: orange;
+}
+
+p span {
+  margin-right: 30%;
+}
+
+.product:hover {
   transform: scale(1.1);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0, 10), 0 3px 6px rgba(0, 0, 0, 23);
-}
-
-.content img {
-  max-width: 100%;
-  border-radius: 30px;
-  height: auto;
-  text-align: center;
-  margin: 0 auto;
-  display: block
-}
-
-@media(max-width: 1000px) {
-  .content {
-    width: 45%;
-  }
-}
-
-@media(max-width: 750px) {
-  .content {
-    width: 100%;
-  }
 }
 </style>

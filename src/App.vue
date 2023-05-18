@@ -10,8 +10,9 @@ export default {
   name: "app",
   components: {
     MainHeader
-},
-};
+  },
+}
+
 </script>
 
 <style> @import './assets/main.css';

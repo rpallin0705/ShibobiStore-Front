@@ -4,34 +4,27 @@
             <ProductContainer></ProductContainer>
             <ProductContainer></ProductContainer>
             <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
-            <ProductContainer></ProductContainer>
+
         </div>
 
     </section>
 </template>
+
+
 <script>
 import ProductContainer from '../components/ProductContainer.vue';
 export default {
     name: 'StorePage',
     components: {
         ProductContainer,
-    }
+    },
+
 }
 
 
 </script>
+
+
 <style>
 .tienda {
     width: 100%;

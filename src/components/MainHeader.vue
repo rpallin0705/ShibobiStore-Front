@@ -42,6 +42,7 @@ header {
   z-index: 1000;
   background-color: rgba(0, 0, 0, 0.623);
   overflow-y: hidden;
+  display: none;
 }
 
 header .head {
