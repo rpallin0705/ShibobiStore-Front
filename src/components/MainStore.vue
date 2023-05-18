@@ -26,7 +26,7 @@ export default {
 
 
 </script>
-<style>
+<style scoped>
 .mostFeatured {
     width: 100%;
     height: auto;
@@ -35,7 +35,6 @@ export default {
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
-    overflow: scroll;
 }
 
 .productos {
@@ -43,6 +42,7 @@ export default {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .btn {

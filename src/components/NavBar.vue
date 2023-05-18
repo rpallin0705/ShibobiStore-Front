@@ -9,10 +9,10 @@
             </span>
         </label>
         <ul>
-            <li><a href="a" class="active">Home</a></li>
-            <li><a href="a">Shop</a></li>
-            <li><a href="a">About</a></li>
-            <li><a href="a">Login</a></li>
+            <li><RouterLink to="/" active-class="active">Home</RouterLink></li>
+            <li><RouterLink to="/store" active-class="active">Shop</RouterLink></li>
+            <li><RouterLink to="log-in" active-class="active">Login</RouterLink></li>
+            <li><RouterLink to="/sign-up" active-class="active">SignUp</RouterLink></li>
         </ul>
     </nav>
 </template>
@@ -22,7 +22,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 nav {
     max-height: 100%;
     max-width: 100%;

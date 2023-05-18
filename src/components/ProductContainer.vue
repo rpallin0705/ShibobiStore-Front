@@ -1,9 +1,10 @@
 <template>
-  <div class="content">
-    <img src="../assets/btf4.jpg">
-    <h3>Battlefield 4</h3>
-    <p>60$</p>
-  </div>
+    <div class="content">
+      <img src="../assets/btf4.jpg">
+      <h3>Battlefield 4</h3>
+      <p>60$</p>
+    </div>
+  
 </template>
 
 <script>
@@ -11,7 +12,7 @@ export default {
   name: 'ProductContainer'
 }
 </script>
-<style>
+<style scoped>
 .content {
   width: 30%;
   margin: 20px;
@@ -54,5 +55,4 @@ export default {
     width: 100%;
   }
 }
-
 </style>

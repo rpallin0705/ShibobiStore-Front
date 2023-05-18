@@ -1,5 +1,4 @@
 <template>
-    <MainHeader></MainHeader>
     <section class="tienda">
         <div class="productos" id="productos">
             <ProductContainer></ProductContainer>
@@ -23,14 +22,11 @@
     </section>
 </template>
 <script>
-import MainHeader from './MainHeader.vue';
 import ProductContainer from '../components/ProductContainer.vue';
 export default {
     name: 'StorePage',
     components: {
         ProductContainer,
-        MainHeader,
-
     }
 }
 
