@@ -17,26 +17,15 @@ export default {
 }
 </script>
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0");
-
 .material-symbols-outlined {
-    color: white;
-    position: absolute;
-    font-weight: 900;
-    right: -2px;
-    top: 0;
-    width: 50px;
-    height: 100%;
-    background: rgb(236, 108, 3);
-    border-radius: 25px;
-    text-align: center;
-    line-height: 50px;
     font-variation-settings:
         'FILL' 0,
         'wght' 400,
         'GRAD' 0,
         'opsz' 48
 }
+
+
 
 #check {
     display: none;
@@ -59,9 +48,12 @@ export default {
 }
 
 #check:checked~.search-box {
-    max-width: 300px;
+    max-width: 400px;
+
 
 }
+
+
 
 .search-box input {
     position: absolute;
@@ -73,5 +65,26 @@ export default {
     border: none;
     padding-left: 20px;
     font-size: 18px;
+}
+
+.search-box .icon {
+    background: white;
+    position: absolute;
+    font-weight:bold;
+    right: -2px;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    color: rgb(236, 108, 3);
+    text-align: center;
+    line-height: 65px;
+    border-radius: 25px;
+}
+
+#check:checked~.search-box .icon {
+    background: rgb(236, 108, 3);
+    color: white;
+    border-radius: 0 25px 25px 0;
+    width: 60px;
 }
 </style>
