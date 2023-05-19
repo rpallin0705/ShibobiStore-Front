@@ -1,8 +1,8 @@
 <template>
     <section class="tienda">
-        <RouterLink to="game" class="productos" id="productos">
+        <div class="productos" id="productos">
             <ProductContainer :juegos="juegos"></ProductContainer>
-        </RouterLink>
+        </div>
 
     </section>
 </template>
