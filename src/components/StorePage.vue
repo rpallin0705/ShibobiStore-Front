@@ -57,7 +57,7 @@ export default {
 .tienda {
     width: 100%;
     height: 100vh;
-    background-image: url('../assets/background.png');
+    background-image: url('../assets/shop_back.png');
     box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.3);
     background-size: cover;
     background-position: center;
