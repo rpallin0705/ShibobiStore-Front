@@ -1,19 +1,20 @@
 <template>
     <section>
         <div class="foto-slider">
-            <img src="../assets/btf4.jpg">
+            <img :src=" juegos.juegos.image_port ">
         </div>
         <div class="items">
-            <img class="item" src="../assets/btf4.jpg">
+            <img class="item" :src="juegos.juegos.image">
             <div class="product-info">
-                <h3>Battlefield 4<span class="material-symbols-outlined">
+                <h3>{{ juegos.juegos.nombre }}
+                    <span class="material-symbols-outlined">
                         favorite
                     </span></h3>
                 <div class="sub-info">
                     <h2>En stock</h2>
                 </div>
                 <div class="precios">
-                    <p><span class="old-price">60$</span><span class="discount">30%</span><span class="new-price">40$</span>
+                    <p><span class="old-price">{{ juegos.juegos.precio }}</span><span class="discount">{{ juegos.juegos.descuento }}%</span><span class="new-price">{{ juegos.juegos.precio * juegos.juegos.descuento /100 }}$</span>
                     </p>
                 </div>
                 <div class="shopping">-
@@ -24,7 +25,8 @@
 
         </div>
         <div class="desc">
-            <p>piumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpiumpium</p>
+            <p>{{ juegos.juegos.descripcion }}
+            </p>
         </div>
     </section>
 </template>
@@ -33,6 +35,11 @@
 
 export default {
     name: "GamePage",
+   computed:{
+    juegos(){
+        return JSON.parse(this.$route.query.juegos)
+    }
+   }
 
 }
 </script>
@@ -115,13 +122,15 @@ section {
 }
 
 .precios {
+    width: 100%;
     margin-top: 30px;
     color: white;
+    text-align: center;
 
 }
 
 .precios span {
-    padding: 10px;
+    padding: 5px;
 }
 
 .old-price {
@@ -188,10 +197,11 @@ section {
     transform: scale(1.1);
 }
 
-.desc{
+.desc {
     width: 100%;
     word-wrap: break-word;
     color: white;
-    font-size: 20px;
+    font-size: 2em;
+    text-align: center;
 }
 </style>

@@ -1,17 +1,22 @@
 <template>
-  <div class="product">
-    <img src="../assets/btf4.jpg" alt="Nombre del juego" class="product-image">
+  <RouterLink :to="{ path: 'game', query: { juegos: JSON.stringify({ juegos }) } }" class="product" v-for="juegos in juegos"
+    :key="juegos.id">
+    <img :src="juegos.image">
     <div class="info">
-      <h2 class="product-title"></h2>
-      <p><span class="old-price">60$</span><span class="discount">30%</span><span class="new-price">40$</span></p>
+      <h2 class="product-title">{{ juegos.nombre }}</h2>
+      <p><span class="old-price">{{ juegos.precio + "$" }}</span>
+        <span class="discount">{{ juegos.descuento + "%" }}</span><span class="new-price">{{
+          juegos.precio * juegos.descuento / 100 + "$" }}</span>
+      </p>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script>
 
 export default {
   name: 'ProductContainer',
+  props: ['juegos']
 
 }
 
@@ -19,17 +24,17 @@ export default {
 
 
 
-<style scoped>
+<style >
 .product {
   width: 30%;
-  background: rgba(0, 0, 0, 0.583);
-  display: none;
+  height: 300px;
+  display: flex;
   flex-direction: column;
   color: white;
-  margin: 10px;
+  margin-right: 30px;
   border-radius: 10px;
   transition: 0.3s all;
-  overflow-x: hidden;
+
 }
 
 .product img {
@@ -42,6 +47,10 @@ export default {
 
 p {
   margin-top: 10px;
+}
+
+h2 {
+  font-size: 1.8em;
 }
 
 .old-price {

@@ -16,7 +16,7 @@ export default {
 <style scoped>
 .slider {
   height: 100vh;
-  background: url('../assets/shinobi_store.png') no-repeat;
+  background: url('../assets/shop_back.png') no-repeat;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
