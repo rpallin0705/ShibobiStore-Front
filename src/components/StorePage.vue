@@ -61,6 +61,7 @@ export default {
     position: fixed;
     padding-top: 100px;
     overflow-y: auto;
+    overflow-x:hidden;
     max-height: 100vh;
 }
 

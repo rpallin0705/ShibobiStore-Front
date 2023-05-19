@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="foto-slider">
-            <img :src=" juegos.juegos.image_port ">
+            <img :src="juegos.juegos.image_port">
         </div>
         <div class="items">
             <img class="item" :src="juegos.juegos.image">
@@ -9,12 +9,15 @@
                 <h3>{{ juegos.juegos.nombre }}
                     <span class="material-symbols-outlined">
                         favorite
-                    </span></h3>
+                    </span>
+                </h3>
                 <div class="sub-info">
                     <h2>En stock</h2>
                 </div>
                 <div class="precios">
-                    <p><span class="old-price">{{ juegos.juegos.precio }}</span><span class="discount">{{ juegos.juegos.descuento }}%</span><span class="new-price">{{ juegos.juegos.precio * juegos.juegos.descuento /100 }}$</span>
+                    <p><span class="old-price">{{ juegos.juegos.precio }}</span><span class="discount">{{
+                        juegos.juegos.descuento }}%</span><span class="new-price">{{ juegos.juegos.precio -
+        juegos.juegos.precio * juegos.juegos.descuento / 100 }}$</span>
                     </p>
                 </div>
                 <div class="shopping">-
@@ -35,11 +38,11 @@
 
 export default {
     name: "GamePage",
-   computed:{
-    juegos(){
-        return JSON.parse(this.$route.query.juegos)
+    computed: {
+        juegos() {
+            return JSON.parse(this.$route.query.juegos)
+        }
     }
-   }
 
 }
 </script>
