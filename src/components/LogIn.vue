@@ -2,16 +2,16 @@
     <section>
         <div class="form-box">
             <div class="form-vale">
-                <form action="">
+                <form @submit="login()">
                     <h2>Log in</h2>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">person</span>
-                        <input type="email" required>
+                        <input type="text" required v-model="userData.emailOrUser">
                         <label for="">Email</label>
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required>
+                        <input type="password" required v-model="userData.passwd">
                         <label for="">Password</label>
                     </div>
                     <div class="forget">
@@ -20,7 +20,8 @@
                     </div>
                     <button>Log in</button>
                     <div class="register">
-                        <p>Not registered?<RouterLink to="sign-up">Join our army</RouterLink></p>
+                        <p>Not registered?<RouterLink to="sign-up">Join our army</RouterLink>
+                        </p>
                     </div>
                 </form>
             </div>
@@ -28,10 +29,40 @@
     </section>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
     name: 'LogIn',
+    data() {
+        return {
+            userData: {
+                emailOrUser: '',
+                passwd: ''
+            }
+        }
+    },
+    computed: {
+        ...mapState('auth', ['loggedIn', 'user']),
+    },
+    methods: {
+        ...mapMutations('auth', ['setLoggedIn', 'setUser']),
+        login() {
+            // Lógica de inicio de sesión
+            console.log(this.userData);
+
+            // Después de verificar las credenciales del usuario
+            /*this.setLoggedIn(true);
+            this.setUser({ id: 1, name: 'John Doe' });*/
+        },
+        logout() {
+            // Lógica de cierre de sesión
+            this.setLoggedIn(false);
+            this.setUser(null);
+        },
+    },
 }
 </script>
+
 <style scoped>
 @import 'https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0';
 
