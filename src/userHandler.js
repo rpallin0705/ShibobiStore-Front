@@ -6,15 +6,26 @@ const store = createStore({
       namespaced: true,
       state: {
         loggedIn: false,
-        user: null,
+        userName: null,
+        iD: null
       },
       mutations: {
         setLoggedIn(state, loggedIn) {
           state.loggedIn = loggedIn;
         },
-        setUser(state, user) {
-          state.user = user;
+        setUser(state ,user) {
+          state.userName = user;
         },
+        setUseriD(state ,id) {
+          state.iD = id;
+        },
+
+        logout(state) {
+          state.userName = null;
+          state.userName = null;
+          state.loggedIn = false;
+        }
+
       },
     },
   },

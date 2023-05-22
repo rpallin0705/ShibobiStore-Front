@@ -7,7 +7,7 @@ import LogIn from './components/LogIn.vue'
 import SignUp from './components/SignUp.vue'
 import GamePage from './components/GamePage.vue'
 import StorePage from './components/StorePage.vue'
-
+import store from './userHandler'
 
 //Rutas
 const routes = [
@@ -29,6 +29,7 @@ const router = createRouter({
 
 //instancia de Vue
 const app = createApp(App)
+app.use(store);
 app.use(router)
   .mount('#app')
 

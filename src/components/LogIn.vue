@@ -30,7 +30,10 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex';
-//import axios from 'axios';
+import axios from 'axios';
+import Global from '@/global';
+import swal from 'sweetalert';
+
 export default {
     name: 'LogIn',
     data() {
@@ -38,34 +41,45 @@ export default {
             userData: {
                 username: '',
                 password: ''
-            }
+            },
+
         }
     },
     computed: {
-        ...mapState('auth', ['loggedIn', 'user']),
+        ...mapState('auth', ['loggedIn', 'userName', 'iD']),
     },
     methods: {
-        ...mapMutations('auth', ['setLoggedIn', 'setUser']),
+        ...mapMutations('auth', ['setLoggedIn', 'setUser', 'logout', 'setUseriD']),
         login() {
             // Lógica de inicio de sesión
-            console.log(this.userData);
 
-            axios.post(this.url + "users/login", this.userData)
+            axios.post(Global.url + "users/login", this.userData)
                 .then(res => {
-                    //this.userData = res.data;
-                    console.log(res.data);
-                }).catch(error=>{
-                    console.log(error);
+
+                    swal(
+                        'Sesión iniciada',
+                        'Las credenciales eran correctas',
+                        'success'
+                    )
+
+                    this.setLoggedIn(true);
+                    this.setUser(res.data.username);
+                    this.setUseriD(res.data.id);
+                    this.$router.push('home');
+                }).catch(error => {
+
+                    swal(
+                        'Sesión fallida',
+                        error.response.data,
+                        'error'
+                    )
                 });
 
-            // Después de verificar las credenciales del usuario
-            /*this.setLoggedIn(true);
-            this.setUser({ id: 1, name: 'John Doe' });*/
-        },
-        logout() {
-            // Lógica de cierre de sesión
-            this.setLoggedIn(false);
-            this.setUser(null);
+            //Después de verificar las credenciales del usuario
+
+
+
+
         },
     },
 }
