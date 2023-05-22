@@ -2,16 +2,16 @@
     <section>
         <div class="form-box">
             <div class="form-vale">
-                <form @submit="login()">
+                <form @submit.prevent="login()">
                     <h2>Log in</h2>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">person</span>
-                        <input type="text" required v-model="userData.emailOrUser">
+                        <input type="text" required v-model="userData.username">
                         <label for="">Email</label>
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required v-model="userData.passwd">
+                        <input type="password" required v-model="userData.password">
                         <label for="">Password</label>
                     </div>
                     <div class="forget">
@@ -30,14 +30,14 @@
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex';
-
+//import axios from 'axios';
 export default {
     name: 'LogIn',
     data() {
         return {
             userData: {
-                emailOrUser: '',
-                passwd: ''
+                username: '',
+                password: ''
             }
         }
     },
@@ -49,6 +49,14 @@ export default {
         login() {
             // Lógica de inicio de sesión
             console.log(this.userData);
+
+            axios.post(this.url + "users/login", this.userData)
+                .then(res => {
+                    //this.userData = res.data;
+                    console.log(res.data);
+                }).catch(error=>{
+                    console.log(error);
+                });
 
             // Después de verificar las credenciales del usuario
             /*this.setLoggedIn(true);
