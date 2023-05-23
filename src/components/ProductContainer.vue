@@ -26,14 +26,15 @@ export default {
 
 <style >
 .product {
-  width: 30%;
+  width: 500px;
   height: 300px;
   display: flex;
   flex-direction: column;
   color: white;
-  margin-right: 30px;
+  margin-right: 40px;
   border-radius: 10px;
   transition: 0.3s all;
+  margin-bottom: 200px;
 
 }
 

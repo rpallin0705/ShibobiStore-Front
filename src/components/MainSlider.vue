@@ -2,7 +2,7 @@
   <section class="slider">
     <div class="content">
       <div class="bienvenida">
-        <h1>Bienvenido a Shinobi Store </h1>
+        <h1>Bienvenido/a a Shinobi Store </h1>
         <h3 v-if="loggedIn != false"> {{ userName }}, te echabamos de menos</h3>
       </div>
       <div class="btn">

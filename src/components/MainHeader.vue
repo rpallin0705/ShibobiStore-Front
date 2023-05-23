@@ -42,18 +42,78 @@
     </div>
   </header>-->
   <header>
-    <div class="logo-container">
+    <div class="container">
       <img src="../assets/logo_texto.png" class="logo">
+
+
+      <div class="box" v-show="$route.path == '/store'">
+        <input type="checkbox" id="check">
+        <div class="search-box">
+          <input type="text" placeholder="Type here...">
+          <label for="check" class="icon">
+            <span class="material-symbols-outlined">
+              search
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          <li>
+            <RouterLink to="/" active-class="active"><span class="material-symbols-outlined">Home</span></RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/store" active-class="active">
+              <span class="material-symbols-outlined">Shop</span>
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink to="log-in" active-class="active" v-show="loggedIn == false">
+              <span class="material-symbols-outlined">Login</span>
+            </RouterLink>
+          </li>
+          <li>
+            <!--#to-do este router link me lleva a /game/log-in en vez de a /login, creo que es por el guion-->
+            <RouterLink to="log-in" active-class="active" v-show="loggedIn != false">
+              <span class="material-symbols-outlined">account_circle</span>
+            </RouterLink>
+          </li>
+          <li>
+            <a @click="log_out" active-class="active" v-show="loggedIn != false"><span
+                class="material-symbols-outlined">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </header>
 </template>
 
 
 <script>
+import { RouterLink } from 'vue-router';
+import { mapMutations, mapState } from 'vuex';
+import swal from 'sweetalert';
 
 export default {
   name: "MainHeader",
-
+  computed: {
+    ...mapState('auth', ['loggedIn']),
+  },
+  methods: {
+    ...mapMutations('auth', ['logout']),
+    log_out() {
+      this.logout();
+      swal(
+        'Sesión cerrada',
+        'Esperamos que vuelvas pronto',
+        'success'
+      )
+      this.$router.push('log-in');
+    }
+  },
+  components: { RouterLink }
 };
 
 </script>
@@ -64,149 +124,23 @@ header {
   position: fixed;
   width: 100%;
   height: 100px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.473);
+  z-index: 1000;
 }
 
-.logo-container {
+.container {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
 }
 
 .logo {
   max-width: 100%;
   max-height: 100%;
+  margin-right: auto;
 }
-
-/*
-header {
-  transition: all 0.4s;
-  position: fixed;
-  width: 100%;
-  height: 100px;
-  z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.623);
-  overflow-y: hidden;
-  display: flex;
-}
-
-header .head {
-  align-items: center;
-  height: 100px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto auto auto;
-}
-
-header img {
-  max-width: 250px;
-  max-height: 100px;
-}
-
-/* NAVBAR 
-nav {
-  max-height: 100%;
-  max-width: 100%;
-  text-align: center;
-
-}
-
-nav ul {
-  height: 100px;
-  float: right;
-  position: relative;
-  left: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-}
-
-nav ul li {
-  display: inline-block;
-  line-height: 80px;
-  margin: 0 5px;
-}
-
-nav ul li a {
-  color: white;
-  font-size: 20px;
-  padding: 7px;
-  border-radius: 20px;
-  text-transform: uppercase;
-}
-
-a.active,
-a:hover {
-  background-color: rgb(255, 115, 0);
-  transition: .5s;
-}
-
-.checkbtn {
-  font-size: 30px;
-  color: white;
-  float: right;
-  line-height: 80px;
-  margin-right: 40px;
-  cursor: pointer;
-  display: none;
-}
-
-#checknav {
-  display: none;
-}
-
-
-@media (max-width: 952px) {
-
-
-  nav ul li a {
-    font-size: 16px;
-
-  }
-}
-
-@media(max-width: 850px) {
-  .checkbtn {
-    display: block;
-  }
-
-  ul {
-    position: fixed;
-    width: 100%;
-    height: 70%;
-    background: rgba(163, 163, 163, 0.295);
-    top: 80px;
-    left: 100%;
-    text-align: center;
-    transition: all .5s;
-
-  }
-
-  nav ul li {
-    display: block;
-    margin: 50px 0;
-    line-height: 30px;
-  }
-
-  nav ul li a {
-    font-size: 20px;
-  }
-
-  a:hover,
-  a.active {
-    background: none;
-    color: rgb(255, 238, 0);
-  }
-
-  #checknav:checked~ul {
-    left: 0;
-  }
-}
-
-/*search 
 
 .material-symbols-outlined {
   font-variation-settings:
@@ -277,5 +211,58 @@ a:hover {
   color: white;
   border-radius: 0 25px 25px 0;
   width: 60px;
-}*/
+}
+
+
+nav {
+  max-height: 100%;
+  max-width: 100%;
+  text-align: center;
+  margin-left: auto;
+
+}
+
+nav ul {
+  height: 100px;
+  float: right;
+  position: relative;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 40px;
+
+}
+
+nav ul li {
+  display: inline-block;
+  line-height: 90px;
+  margin: 0 5px;
+}
+
+
+nav ul li a {
+  color: white;
+  font-size: 20px;
+  padding: 7px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-size: 30px;
+}
+
+a.active,
+a:hover {
+  background-color: rgb(255, 115, 0);
+  transition: .5s;
+}
+
+
+
+@media (max-width: 952px) {
+
+  nav ul li a {
+    font-size: 16px;
+
+  }
+}
 </style>
