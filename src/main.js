@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from './components/HomePage.vue'
 //import StorePage from './components/StorePage.vue'
 import LogIn from './components/LogIn.vue'
@@ -22,7 +22,7 @@ const routes = [
 //Crear objeto rutas
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 
