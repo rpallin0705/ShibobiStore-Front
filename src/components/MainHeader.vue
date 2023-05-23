@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <!--<header>
     <div class="head">
       <img src="../assets/logo_texto.png">
 
@@ -40,6 +40,11 @@
         </ul>
       </nav>
     </div>
+  </header>-->
+  <header>
+    <div class="logo-container">
+      <img src="../assets/logo_texto.png" class="logo">
+    </div>
   </header>
 </template>
 
@@ -55,6 +60,27 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0");
 
+header {
+  position: fixed;
+  width: 100%;
+  height: 100px;
+  background-color: black;
+}
+
+.logo-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/*
 header {
   transition: all 0.4s;
   position: fixed;
@@ -79,7 +105,7 @@ header img {
   max-height: 100px;
 }
 
-/* NAVBAR */
+/* NAVBAR 
 nav {
   max-height: 100%;
   max-width: 100%;
@@ -180,7 +206,7 @@ a:hover {
   }
 }
 
-/*search */
+/*search 
 
 .material-symbols-outlined {
   font-variation-settings:
@@ -251,5 +277,5 @@ a:hover {
   color: white;
   border-radius: 0 25px 25px 0;
   width: 60px;
-}
+}*/
 </style>
