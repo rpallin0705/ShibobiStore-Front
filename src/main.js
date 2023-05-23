@@ -16,7 +16,7 @@ const routes = [
   { path: '/store', component: StorePage },
   { path: '/log-in', component: LogIn },
   { path: '/sign-up', component: SignUp },
-  { path: '/game', component: GamePage },
+  { path: '/game/:nombre', name: 'game', component: GamePage },
 ]
 
 //Crear objeto rutas

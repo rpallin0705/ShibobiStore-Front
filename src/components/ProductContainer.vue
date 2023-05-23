@@ -1,5 +1,5 @@
 <template>
-  <RouterLink :to="{ path: 'game', query: { juegos: JSON.stringify({ juegos }) } }" class="product"
+  <RouterLink :to="{ name: 'game', params: { nombre: juegos.nombre } }" class="product"
     v-for="juegos in juegos" :key="juegos.id">
     <img :src="juegos.image">
     <div class="info">

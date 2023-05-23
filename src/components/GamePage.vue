@@ -1,12 +1,12 @@
 <template>
     <section>
         <div class="foto-slider">
-            <img :src="juegos.juegos.image_port">
+            <img :src="juego.image_port">
         </div>
         <div class="items">
-            <img class="item" :src="juegos.juegos.image">
+            <img class="item" :src="juego.image">
             <div class="product-info">
-                <h3>{{ juegos.juegos.nombre }}
+                <h3>{{ juego.nombre }}
                     <span class="material-symbols-outlined">
                         favorite
                     </span>
@@ -15,9 +15,9 @@
                     <h2>En stock</h2>
                 </div>
                 <div class="precios">
-                    <p><span class="old-price">{{ juegos.juegos.precio }}</span><span class="discount">{{
-                        juegos.juegos.descuento }}%</span><span class="new-price">{{ juegos.juegos.precio -
-        juegos.juegos.precio * juegos.juegos.descuento / 100 }}$</span>
+                    <p><span class="old-price">{{ juego.precio }}</span><span class="discount">{{
+                        juego.descuento }}%</span><span class="new-price">{{ juego.precio -
+        juego.precio * juego.descuento / 100 }}$</span>
                     </p>
                 </div>
                 <div class="shopping">-
@@ -28,21 +28,35 @@
 
         </div>
         <div class="desc">
-            <p>{{ juegos.juegos.descripcion }}
+            <p>{{ juego.descripcion }}
             </p>
         </div>
     </section>
 </template>
 <script lang="js">
-
+import axios from 'axios';
+import Global from '@/global';
 
 export default {
     name: "GamePage",
-    computed: {
-        juegos() {
-            return JSON.parse(this.$route.query.juegos)
+    data() {
+        return {
+            juego: []
         }
-    }
+    },
+    mounted() {
+        this.getJuego();
+    },
+    methods: {
+        getJuego() {
+            const nombre = this.$route.params.nombre;
+            axios.post(Global.url + 'games/' + nombre)
+                .then(response => {
+                    // La respuesta del servidor
+                    this.juego = response.data;
+                })
+        }
+    },
 
 }
 </script>
