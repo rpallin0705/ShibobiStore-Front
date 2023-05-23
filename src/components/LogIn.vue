@@ -49,7 +49,7 @@ export default {
         ...mapState('auth', ['loggedIn', 'userName', 'iD']),
     },
     methods: {
-        ...mapMutations('auth', ['setLoggedIn', 'setUser', 'logout', 'setUseriD']),
+        ...mapMutations('auth', ['setLoggedIn', 'setUser', 'logout', 'setUseriD', 'setUserEmail']),
         login() {
             // Lógica de inicio de sesión
 
@@ -65,6 +65,7 @@ export default {
                     this.setLoggedIn(true);
                     this.setUser(res.data.username);
                     this.setUseriD(res.data.id);
+                    this.setUserEmail(res.data.email);
                     this.$router.push('home');
                 }).catch(error => {
 

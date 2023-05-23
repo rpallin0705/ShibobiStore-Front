@@ -2,26 +2,27 @@
     <section>
         <div class="form-box">
             <div class="form-vale">
-                <form action="">
+                <form @submit.prevent="singup">
                     <h2>Join our army</h2>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">person</span>
-                        <input type="email" required>
+                        <input type="email" required v-model="userData.email">
                         <label for="">Email</label>
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required>
-                        <label for="">Password</label>
+                        <input type="text" required v-model="userData.username">
+                        <label for="">Username</label>
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required>
+                        <input type="password" required v-model="userData.password">
                         <label for="">Password</label>
                     </div>
                     <button>Sign up</button>
                     <div class="register">
-                        <p>Already have an account?<RouterLink to="log-in">Log in</RouterLink></p>
+                        <p>Already have an account?<RouterLink to="log-in">Log in</RouterLink>
+                        </p>
                     </div>
                 </form>
             </div>
@@ -29,8 +30,44 @@
     </section>
 </template>
 <script>
+import axios from 'axios';
+import swal from 'sweetalert';
+import Global from '@/global';
+
 export default {
     name: 'SignUp',
+    data() {
+        return {
+            userData: {
+                username: null,
+                email: null,
+                password: null
+            }
+
+        }
+    },
+    methods: {
+        singup() {
+            axios.post(Global.url + "users/sing-up", this.userData)
+                .then(() => {
+
+                    swal(
+                        'Registro completado',
+                        'Bienvenido a shinobi store',
+                        'success'
+                    )
+                    this.$router.push('log-in');
+
+                }).catch(error => {
+
+                    swal(
+                        'Error de registro',
+                        error.response.data,
+                        'error'
+                    )
+                });
+        }
+    }
 }
 </script>
 <style scoped>

@@ -7,7 +7,8 @@ const store = createStore({
       state: {
         loggedIn: false,
         userName: null,
-        iD: null
+        iD: null,
+        email: null,
       },
       mutations: {
         setLoggedIn(state, loggedIn) {
@@ -18,6 +19,9 @@ const store = createStore({
         },
         setUseriD(state ,id) {
           state.iD = id;
+        },
+        setUserEmail(state ,correo) {
+          state.email = correo;
         },
 
         logout(state) {
