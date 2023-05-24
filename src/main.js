@@ -7,6 +7,7 @@ import LogIn from './components/LogIn.vue'
 import SignUp from './components/SignUp.vue'
 import GamePage from './components/GamePage.vue'
 import StorePage from './components/StorePage.vue'
+import ProfilePage from './components/ProfilePage.vue'
 import store from './userHandler'
 
 //Rutas
@@ -14,8 +15,9 @@ const routes = [
   { path: '/', component: HomePage },
   { path: '/home', component: HomePage },
   { path: '/store', component: StorePage },
-  { path: '/log-in', component: LogIn },
+  { path: '/login', component: LogIn },
   { path: '/sign-up', component: SignUp },
+  { path: '/profile', component: ProfilePage },
   { path: '/game/:nombre', name: 'game', component: GamePage },
 ]
 

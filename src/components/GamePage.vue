@@ -1,4 +1,5 @@
 <template>
+    <MainHeader></MainHeader>
     <section>
         <div class="foto-slider">
             <img :src="juego.image_port">
@@ -36,13 +37,14 @@
 <script lang="js">
 import axios from 'axios';
 import Global from '@/global';
+import MainHeader from './MainHeader.vue';
 
 export default {
     name: "GamePage",
     data() {
         return {
             juego: []
-        }
+        };
     },
     mounted() {
         this.getJuego();
@@ -50,14 +52,14 @@ export default {
     methods: {
         getJuego() {
             const nombre = this.$route.params.nombre;
-            axios.post(Global.url + 'games/' + nombre)
+            axios.post(Global.url + "games/" + nombre)
                 .then(response => {
-                    // La respuesta del servidor
-                    this.juego = response.data;
-                })
+                // La respuesta del servidor
+                this.juego = response.data;
+            });
         }
     },
-
+    components: { MainHeader }
 }
 </script>
 <style scoped>

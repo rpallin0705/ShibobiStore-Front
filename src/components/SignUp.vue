@@ -1,4 +1,5 @@
 <template>
+    <MainHeader></MainHeader>
     <section>
         <div class="form-box">
             <div class="form-vale">
@@ -21,7 +22,7 @@
                     </div>
                     <button>Sign up</button>
                     <div class="register">
-                        <p>Already have an account?<RouterLink to="log-in">Log in</RouterLink>
+                        <p>Already have an account?<RouterLink to="login">Log in</RouterLink>
                         </p>
                     </div>
                 </form>
@@ -33,9 +34,10 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 import Global from '@/global';
+import MainHeader from './MainHeader.vue';
 
 export default {
-    name: 'SignUp',
+    name: "SignUp",
     data() {
         return {
             userData: {
@@ -43,31 +45,20 @@ export default {
                 email: null,
                 password: null
             }
-
-        }
+        };
     },
     methods: {
         singup() {
             axios.post(Global.url + "users/sing-up", this.userData)
                 .then(() => {
-
-                    swal(
-                        'Registro completado',
-                        'Bienvenido a shinobi store',
-                        'success'
-                    )
-                    this.$router.push('log-in');
-
-                }).catch(error => {
-
-                    swal(
-                        'Error de registro',
-                        error.response.data,
-                        'error'
-                    )
-                });
+                swal("Registro completado", "Bienvenido a shinobi store", "success");
+                this.$router.push("login");
+            }).catch(error => {
+                swal("Error de registro", error.response.data, "error");
+            });
         }
-    }
+    },
+    components: { MainHeader }
 }
 </script>
 <style scoped>

@@ -1,4 +1,5 @@
 <template>
+    <MainHeader></MainHeader>
     <section class="tienda">
         <div class="productos" id="productos">
             <ProductContainer :juegos="juegos"></ProductContainer>
@@ -12,12 +13,14 @@
 import Global from '../global';
 import axios from "axios";
 import ProductContainer from '../components/ProductContainer.vue';
+import MainHeader from './MainHeader.vue';
 
 export default {
     name: 'StorePage',
     components: {
-        ProductContainer,
-    },
+    ProductContainer,
+    MainHeader
+},
     data() {
         return {
             juegos: [],

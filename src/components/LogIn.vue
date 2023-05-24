@@ -1,4 +1,5 @@
 <template>
+    <MainHeader></MainHeader>
     <section>
         <div class="form-box">
             <div class="form-vale">
@@ -33,56 +34,40 @@ import { mapState, mapMutations } from 'vuex';
 import axios from 'axios';
 import Global from '@/global';
 import swal from 'sweetalert';
+import MainHeader from './MainHeader.vue';
 
 export default {
-    name: 'LogIn',
+    name: "LogIn",
     data() {
         return {
             userData: {
-                username: '',
-                password: ''
+                username: "",
+                password: ""
             },
-
-        }
+        };
     },
     computed: {
-        ...mapState('auth', ['loggedIn', 'userName', 'iD']),
+        ...mapState("auth", ["loggedIn", "userName", "iD"]),
     },
     methods: {
-        ...mapMutations('auth', ['setLoggedIn', 'setUser', 'logout', 'setUseriD', 'setUserEmail']),
+        ...mapMutations("auth", ["setLoggedIn", "setUser", "logout", "setUseriD", "setUserEmail"]),
         login() {
             // Lógica de inicio de sesión
-
             axios.post(Global.url + "users/login", this.userData)
                 .then(res => {
-
-                    swal(
-                        'Sesión iniciada',
-                        'Las credenciales eran correctas',
-                        'success'
-                    )
-
-                    this.setLoggedIn(true);
-                    this.setUser(res.data.username);
-                    this.setUseriD(res.data.id);
-                    this.setUserEmail(res.data.email);
-                    this.$router.push('home');
-                }).catch(error => {
-
-                    swal(
-                        'Sesión fallida',
-                        error.response.data,
-                        'error'
-                    )
-                });
-
+                swal("Sesión iniciada", "Las credenciales eran correctas", "success");
+                this.setLoggedIn(true);
+                this.setUser(res.data.username);
+                this.setUseriD(res.data.id);
+                this.setUserEmail(res.data.email);
+                this.$router.push("home");
+            }).catch(error => {
+                swal("Sesión fallida", error.response.data, "error");
+            });
             //Después de verificar las credenciales del usuario
-
-
-
-
         },
     },
+    components: { MainHeader }
 }
 </script>
 

@@ -69,13 +69,12 @@
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="log-in" active-class="active" v-show="loggedIn == false">
+            <RouterLink to="../login" active-class="active" v-show="loggedIn == false">
               <span class="material-symbols-outlined">Login</span>
             </RouterLink>
           </li>
           <li>
-            <!--#to-do este router link me lleva a /game/log-in en vez de a /login, creo que es por el guion-->
-            <RouterLink to="log-in" active-class="active" v-show="loggedIn != false">
+            <RouterLink to="Profile" active-class="active" v-show="loggedIn != false">
               <span class="material-symbols-outlined">account_circle</span>
             </RouterLink>
           </li>
@@ -110,7 +109,11 @@ export default {
         'Esperamos que vuelvas pronto',
         'success'
       )
-      this.$router.push('log-in');
+      this.$router.push('login');
+    },
+    login() {
+      window.open('/login', '_self');
+      console.log("hola")
     }
   },
   components: { RouterLink }
