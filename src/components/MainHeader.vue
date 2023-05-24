@@ -69,12 +69,12 @@
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="../login" active-class="active" v-show="loggedIn == false">
+            <RouterLink to="/login" active-class="active" v-show="loggedIn == false">
               <span class="material-symbols-outlined">Login</span>
             </RouterLink>
           </li>
           <li>
-            <RouterLink to="Profile" active-class="active" v-show="loggedIn != false">
+            <RouterLink to="/profile" active-class="active" v-show="loggedIn != false">
               <span class="material-symbols-outlined">account_circle</span>
             </RouterLink>
           </li>
