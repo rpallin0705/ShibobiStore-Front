@@ -5,22 +5,49 @@
         <article>
             <h2>Juegos Favoritos</h2>
             <div class="juegos-fav">
-                <img src="../assets/btf4.jpg">
-                <h1>Battlefield 4</h1>
-                <h1>60E</h1>
-                <span class="material-symbols-outlined">shop</span>
+                <div class="port">
+                    <img src="../assets/btf4.jpg">
+                    <h2>Battlefield 4</h2>
+                    <h1>60E</h1>
+                </div>
+
+                <div class="iconos">
+                    <span class="material-symbols-outlined">shop</span>
+                    <span class="material-symbols-outlined">delete</span>
+                </div>
             </div>
             <div class="juegos-fav">
-                <img src="../assets/btf4.jpg">
-                <h1>Battlefield 4</h1>
+                <div class="port">
+                    <img src="../assets/btf4.jpg">
+                </div>
+                <h2>Battlefield 4</h2>
                 <h1>60E</h1>
-                <span class="material-symbols-outlined">shop</span>
+                <div class="iconos">
+                    <span class="material-symbols-outlined">shop</span>
+                    <span class="material-symbols-outlined">delete</span>
+                </div>
             </div>
             <div class="juegos-fav">
-                <img src="../assets/btf4.jpg">
-                <h1>Battlefield 4</h1>
+                <div class="port">
+                    <img src="../assets/btf4.jpg">
+                </div>
+                <h2>Battlefield 4</h2>
                 <h1>60E</h1>
-                <span class="material-symbols-outlined">shop</span>
+                <div class="iconos">
+                    <span class="material-symbols-outlined">shop</span>
+                    <span class="material-symbols-outlined">delete</span>
+                </div>
+            </div>
+            <div class="juegos-fav">
+                <div class="port">
+                    <img src="../assets/btf4.jpg">
+                </div>
+                <h2>Battlefield 4</h2>
+                <h1>60E</h1>
+                <div class="iconos">
+                    <span class="material-symbols-outlined">shop</span>
+                    <span class="material-symbols-outlined">delete</span>
+                </div>
             </div>
         </article>
 
@@ -50,9 +77,10 @@ section {
     display: grid;
     grid-template-areas:
         "head head head"
-        "content content aside";
-    background-color: blueviolet;
+        "conte conte side";
+    background-color: rgb(49, 226, 43);
     height: 100vh;
+    grid-template-rows: 100px 1fr;
 
 }
 
@@ -60,22 +88,52 @@ section {
     grid-area: head;
     position: relative;
     background-color: black;
+
 }
 
 article {
-    grid-area: content;
+    height: 100%;
+    
+    grid-area: conte;
     background-color: rgb(255, 0, 0);
     overflow-y: scroll;
+
 }
 
 aside {
-    grid-area: aside;
+    background-color: violet;
+    grid-area: side;
+
 }
 
 .juegos-fav {
+    height: 30%;
+    box-sizing: border-box;
     display: flex;
-    justify-content: left;
     align-items: center;
-    text-align: center;
+
+
+
+}
+
+.juegos-fav .port {
+    height: 70%;
+    width: auto;
+    display: flex;
+
+}
+
+.port img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 50px;
+}
+
+
+.juegos-fav h2,
+.juegos-fav h1,
+.juegos-fav span {
+    color: white;
 }
 </style>
