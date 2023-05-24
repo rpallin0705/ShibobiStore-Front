@@ -111,10 +111,6 @@ export default {
       )
       this.$router.push('login');
     },
-    login() {
-      window.open('/login', '_self');
-      console.log("hola")
-    }
   },
   components: { RouterLink }
 };

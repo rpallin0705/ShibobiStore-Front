@@ -6,7 +6,7 @@
         <h2>Battlefield 4</h2>
         <h1>60E</h1>
         <div class="iconos">
-            <span title="Comprar" class="material-symbols-outlined">shop</span>
+            <span title="Comprar" class="material-symbols-outlined">shopping_bag</span>
             <a title="Eliminar de favoritos" class="material-symbols-outlined">delete</a>
         </div>
     </div>
@@ -72,7 +72,7 @@ export default {
     height: 70%;
     font-size: 50px;
     color: white;
-    background-color: orange;
+    background-color: rgb(253, 130, 15);
     border-radius: 30px;
     transition: 0.3s all;
     cursor: pointer;

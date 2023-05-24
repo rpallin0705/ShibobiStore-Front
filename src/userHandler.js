@@ -33,7 +33,7 @@ const store = createStore({
 
         logout(state) {
           state.userName = null;
-          state.userName = null;
+          state.email = null;
           state.loggedIn = false;
           state.correo = null
 
