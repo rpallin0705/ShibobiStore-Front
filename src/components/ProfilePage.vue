@@ -5,9 +5,9 @@
         <div class="perfil">
             <article>
                 <div class="select">
-                    <button :style="{ backgroundColor: favGame ? 'orange' : 'initial' }" @click="favGameButton">Juegos
+                    <button :style="{ backgroundColor: favGame ? 'rgb(226, 93, 3)' : 'initial' }" @click="favGameButton">Juegos
                         Favoritos</button>
-                    <button :style="{ backgroundColor: myGame ? 'orange' : 'initial' }"
+                    <button :style="{ backgroundColor: myGame ? 'rgb(226, 93, 3)' : 'initial' }"
                         @click="myGameButton">MisJuegos</button>
                 </div>
                 <FavGame v-if="favGame == 1"></FavGame>
@@ -109,7 +109,6 @@ export default {
 section {
     height: 100vh;
     width: 100%;
-    background-color: violet;
     overflow-y: hidden;
 
 }
@@ -118,7 +117,6 @@ section {
     height: 100%;
     width: 100%;
     display: flex;
-    background-color: blue;
     overflow-y: hidden;
 }
 
