@@ -5,7 +5,8 @@
         <div class="perfil">
             <article>
                 <div class="select">
-                    <button :style="{ backgroundColor: favGame ? 'rgb(226, 93, 3)' : 'initial' }" @click="favGameButton">Juegos
+                    <button :style="{ backgroundColor: favGame ? 'rgb(226, 93, 3)' : 'initial' }"
+                        @click="favGameButton">Juegos
                         Favoritos</button>
                     <button :style="{ backgroundColor: myGame ? 'rgb(226, 93, 3)' : 'initial' }"
                         @click="myGameButton">MisJuegos</button>
@@ -36,6 +37,8 @@ import FavGame from './FavGame.vue';
 import MyGame from './MyGame.vue';
 import swal from 'sweetalert';
 import { mapMutations, mapState } from 'vuex';
+
+
 export default {
     name: "ProfilePage",
     components: { MainHeader, FavGame, MyGame },
@@ -43,6 +46,7 @@ export default {
         return {
             favGame: 1,
             myGame: 0,
+            favGames: [],
 
 
         }
@@ -71,12 +75,13 @@ export default {
             this.myGame = 1;
         },
 
+
+
     },
     mounted() {
         if (!this.loggedIn) {
             this.$router.push('/login');
         }
-
     }
 }
 

@@ -1,27 +1,66 @@
 <template>
-    <div class="juegos-fav">
-        <div class="port">
-            <img src="../assets/btf4.jpg">
-        </div>
-        <h2>Battlefield 4</h2>
-        <h1>60E</h1>
+    <div class="juegos-fav" v-for="favGames in favGames" :key="favGames.id">
+        <RouterLink :to="{ name: 'game', params: { nombre: favGames.game.nombre } }" class="port">
+            <img :src="favGames.game.image">
+        </RouterLink>
+        <RouterLink :to="{ name: 'game', params: { nombre: favGames.game.nombre } }" class="h2">{{ favGames.game.nombre }}
+        </RouterLink>
+        <h1>{{ favGames.game.precio - favGames.game.precio * favGames.game.descuento / 100 + "$" }}</h1>
         <div class="iconos">
             <span title="Comprar" class="material-symbols-outlined">shopping_bag</span>
-            <a title="Eliminar de favoritos" class="material-symbols-outlined">delete</a>
+            <a title="Eliminar de favoritos" class="material-symbols-outlined"
+                @click="deleteFavGames(favGames.game.id)">delete</a>
         </div>
     </div>
 </template>
 <script>
-
+import axios from 'axios';
+import Global from '../global';
+import { mapState } from 'vuex';
+import swal from 'sweetalert';
 
 export default {
     name: 'FavGame',
+    data() {
+        return {
+            favGames: [],
+            userData: {
+                user: null,
+                game: null
+            }
+        }
+    },
+    computed: {
+        ...mapState("auth", ["iD"]),
+    },
+    methods: {
+        getFavGames() {
+            axios.get(Global.url + 'fav-games')
+                .then(res => {
+                    this.favGames = res.data;
+                })
+        },
+        deleteFavGames(gId) {
+            this.userData.game = gId;
+            this.userData.user = this.iD;
+            console.log(this.userData);
+            axios.post(Global.url + 'fav-games/delete', this.userData)
+                .then(() => {
+                    this.getFavGames();
+                    swal("Juego eliminado", 'Juego borrado de tu lista de favoritos', "success");
+                });
+
+
+        }
+    },
+    mounted() {
+        this.getFavGames()
+    }
 }
 
 </script>
 
 <style scoped>
-
 .juegos-fav {
     height: 200px;
     display: flex;
@@ -31,23 +70,40 @@ export default {
     box-sizing: border-box;
     color: white;
 }
+
 .juegos-fav:nth-child(even) {
-      background-color: grey;
+    background-color: grey;
 }
 
 .juegos-fav:nth-child(odd) {
-      background-color: rgb(155, 155, 155);
+    background-color: rgb(155, 155, 155);
 }
 
 .port {
     height: 60%;
     width: 20%;
+    transition: 0.4s all;
 }
 
 .port img {
     height: 100%;
     width: 100%;
     border-radius: 30px;
+}
+
+.port:hover {
+    transform: scale(1.1);
+
+}
+
+.h2 {
+    color: white;
+    font-size: 25px;
+    transition: 0.4s all;
+}
+
+.h2:hover {
+    transform: scale(1.1);
 }
 
 .iconos {

@@ -18,9 +18,9 @@ import MainHeader from './MainHeader.vue';
 export default {
     name: 'StorePage',
     components: {
-    ProductContainer,
-    MainHeader
-},
+        ProductContainer,
+        MainHeader
+    },
     data() {
         return {
             juegos: [],
@@ -35,6 +35,7 @@ export default {
             axios.get(this.url + "games")
                 .then(res => {
                     this.juegos = res.data;
+                
                 })
         }
     }
@@ -64,7 +65,7 @@ export default {
     position: fixed;
     padding-top: 100px;
     overflow-y: auto;
-    overflow-x:hidden;
+    overflow-x: hidden;
     max-height: 100vh;
 }
 
