@@ -9,6 +9,7 @@ import GamePage from './components/GamePage.vue'
 import StorePage from './components/StorePage.vue'
 import ProfilePage from './components/ProfilePage.vue'
 import store from './userHandler'
+import BuyPage from './components/BuyPage.vue'
 
 //Rutas
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
   { path: '/sign-up', component: SignUp },
   { path: '/profile', component: ProfilePage },
   { path: '/game/:nombre', name: 'game', component: GamePage },
+  { path: '/buy', name: 'buy', component: BuyPage },
 ]
 
 //Crear objeto rutas

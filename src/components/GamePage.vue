@@ -7,7 +7,7 @@
         <div class="items">
             <img class="item" :src="juego.image">
             <div class="product-info">
-                <h3>{{ juego.id }}
+                <h3>{{ juego.nombre }}
                     <img v-if="juego.plataforma == 'PC'" src="../assets/pc.png">
                     <img v-if="juego.plataforma == 'Nintendo Switch'" src="../assets/nintendo.png">
                     <img v-if="juego.plataforma == 'PlayStation'" src="../assets/ps.png">
