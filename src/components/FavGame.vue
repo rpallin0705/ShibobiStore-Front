@@ -1,15 +1,15 @@
 <template>
-    <div class="juegos-fav" v-for="favGames in favGames" :key="favGames.id">
-        <RouterLink :to="{ name: 'game', params: { nombre: favGames.game.nombre } }" class="port">
-            <img :src="favGames.game.image">
+    <div class="juegos-fav" v-for="favGame in favGames" :key="favGame.id">
+        <RouterLink :to="{ name: 'game', params: { nombre: favGame.game.nombre } }" class="port">
+            <img :src="favGame.game.image">
         </RouterLink>
-        <RouterLink :to="{ name: 'game', params: { nombre: favGames.game.nombre } }" class="h2">{{ favGames.game.nombre }}
+        <RouterLink :to="{ name: 'game', params: { nombre: favGame.game.nombre } }" class="h2">{{ favGame.game.nombre }}
         </RouterLink>
-        <h1>{{ favGames.game.precio - favGames.game.precio * favGames.game.descuento / 100 + "$" }}</h1>
+        <h1>{{ favGame.game.precio - favGame.game.precio * favGame.game.descuento / 100 + "$" }}</h1>
         <div class="iconos">
             <span title="Comprar" class="material-symbols-outlined">shopping_bag</span>
             <a title="Eliminar de favoritos" class="material-symbols-outlined"
-                @click="deleteFavGames(favGames.game.id)">delete</a>
+                @click="deleteFavGames(favGame.game.id)">delete</a>
         </div>
     </div>
 </template>
@@ -27,6 +27,9 @@ export default {
             userData: {
                 user: null,
                 game: null
+            },
+            usuario:{
+                user: null
             }
         }
     },
@@ -35,7 +38,8 @@ export default {
     },
     methods: {
         getFavGames() {
-            axios.get(Global.url + 'fav-games')
+            this.usuario.user = this.iD;
+            axios.post(Global.url + 'fav-games/get', this.usuario)
                 .then(res => {
                     this.favGames = res.data;
                 })

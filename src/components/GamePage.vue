@@ -7,22 +7,25 @@
         <div class="items">
             <img class="item" :src="juego.image">
             <div class="product-info">
-                <h3>{{ juego.nombre }}
-                    <span class="material-symbols-outlined">
-                        favorite
-                    </span>
+                <h3>{{ juego.id }}
+                    <img v-if="juego.plataforma == 'PC'" src="../assets/pc.png">
+                    <img v-if="juego.plataforma == 'Nintendo Switch'" src="../assets/nintendo.png">
+                    <img v-if="juego.plataforma == 'PlayStation'" src="../assets/ps.png">
+                    <img v-if="juego.plataforma == 'Xbox'" src="../assets/xbox.png">
                 </h3>
                 <div class="sub-info">
-                    <h2>En stock</h2>
+                    <h2 v-if="juego.n_stock >= 10">En stock</h2>
+                    <h2 v-if="juego.n_stock < 10 && juego.n_stock != 0">Pocas unidades en stock</h2>
+                    <h2 v-if="juego.n_stock == 0">Sin stock</h2>
                 </div>
                 <div class="precios">
-                    <p><span class="old-price">{{ juego.precio }}</span><span class="discount">{{
+                    <p><span class="old-price">{{ juego.precio }}$</span><span class="discount">{{
                         juego.descuento }}%</span><span class="new-price">{{ juego.precio -
         juego.precio * juego.descuento / 100 }}$</span>
                     </p>
                 </div>
                 <div class="shopping">-
-                    <a class="cart"><span class="material-symbols-outlined">shopping_cart</span></a>
+                    <a @click="addFavGames" class="cart"><span class="material-symbols-outlined">favorite</span></a>
                     <a href="·" class="buy-now">Comprar ahora</a>
                 </div>
             </div>
@@ -38,13 +41,22 @@
 import axios from 'axios';
 import Global from '@/global';
 import MainHeader from './MainHeader.vue';
+import { mapState } from 'vuex';
+import swal from 'sweetalert';
 
 export default {
     name: "GamePage",
     data() {
         return {
-            juego: []
+            juego: [],
+            userData: {
+                user: null,
+                game: null
+            }
         };
+    },
+    computed: {
+        ...mapState("auth", ["iD"]),
     },
     mounted() {
         this.getJuego();
@@ -54,9 +66,22 @@ export default {
             const nombre = this.$route.params.nombre;
             axios.post(Global.url + "games/" + nombre)
                 .then(response => {
-                // La respuesta del servidor
-                this.juego = response.data;
-            });
+                    // La respuesta del servidor
+                    this.juego = response.data;
+                });
+        },
+        addFavGames() {
+            this.userData.game = this.juego.id;
+            this.userData.user = this.iD;
+            console.log(this.userData);
+            axios.post(Global.url + 'fav-games', this.userData)
+                .then(() => {
+                    swal("Juego añadido", this.juego.nombre + 'Añadido de tu lista de favoritos', "success");
+                }).catch(error => {
+                swal("El juego ya está en tu lista", error.response.data, "error");
+            });;
+
+
         }
     },
     components: { MainHeader }
@@ -79,6 +104,11 @@ section {
     flex-shrink: 0;
     min-width: 100%;
     max-height: 100%;
+}
+
+.product-info h3 img {
+    width: 30px;
+
 }
 
 .items {

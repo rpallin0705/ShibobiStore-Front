@@ -1,9 +1,14 @@
 <template>
-  <RouterLink :to="{ name: 'game', params: { nombre: juegos.nombre } }" class="product"
-    v-for="juegos in juegos" :key="juegos.id">
+  <RouterLink :to="{ name: 'game', params: { nombre: juegos.nombre } }" class="product" v-for="juegos in juegos"
+    :key="juegos.id">
     <img :src="juegos.image">
     <div class="info">
-      <h2 class="product-title">{{ juegos.nombre }}</h2>
+      <h2 class="product-title">{{ juegos.nombre }}
+        <img v-if="juegos.plataforma == 'PC'" src="../assets/pc.png">
+        <img v-if="juegos.plataforma == 'Nintendo Switch'" src="../assets/nintendo.png">
+        <img v-if="juegos.plataforma=='PlayStation'" src="../assets/ps.png">
+        <img v-if="juegos.plataforma=='Xbox'" src="../assets/xbox.png">
+      </h2>
       <p><span class="old-price">{{ juegos.precio + "$" }}</span>
         <span class="discount">{{ juegos.descuento + "%" }}</span><span class="new-price">
           {{ juegos.precio - juegos.precio * juegos.descuento / 100 + "$" }}</span>
@@ -38,12 +43,17 @@ export default {
 
 }
 
+.product-title img {
+  width: 30px;
+}
+
 .product img {
   border-radius: 10px;
 }
 
 .info {
   padding: 15px;
+
 }
 
 p {
