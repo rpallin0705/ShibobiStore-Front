@@ -5,7 +5,7 @@
         </RouterLink>
         <RouterLink :to="{ name: 'game', params: { nombre: favGame.game.nombre } }" class="h2">{{ favGame.game.nombre }}
         </RouterLink>
-        <h1>{{ favGame.game.precio - favGame.game.precio * favGame.game.descuento / 100 + "$" }}</h1>
+        <h1 class="h1">{{ favGame.game.precio - favGame.game.precio * favGame.game.descuento / 100 + "$" }}</h1>
         <div class="iconos">
             <span title="Comprar" class="material-symbols-outlined">shopping_bag</span>
             <a title="Eliminar de favoritos" class="material-symbols-outlined"
@@ -102,9 +102,15 @@ export default {
 
 .h2 {
     color: white;
-    font-size: 25px;
+    font-size: 30px;
     transition: 0.4s all;
 }
+
+.h1{
+    font-size: 30px;
+}
+
+
 
 .h2:hover {
     transform: scale(1.1);

@@ -79,7 +79,7 @@ export default {
                     swal("Juego añadido", this.juego.nombre + 'Añadido de tu lista de favoritos', "success");
                 }).catch(error => {
                 swal("El juego ya está en tu lista", error.response.data, "error");
-            });;
+            });
 
 
         }

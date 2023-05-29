@@ -1,20 +1,46 @@
 <template>
-    <div class="my-games">
+    <div class="my-games" v-for="myGame in myGames" :key="myGame.id">
         <div class="port">
-            <img src="../assets/btf4.jpg">
+            <img :src="myGame.game.image">
         </div>
-        <h2>Battlefield 4</h2>
-        <h1>60E</h1>
+        <h2>{{ myGame.game.nombre }}</h2>
+        <h1>{{ myGame.game.precio - myGame.game.precio * myGame.game.descuento / 100 + "$" }}</h1>
 
-        <p title="Eliminar de favoritos">XXXX-XXXX-XXXX</p>
+        <p title="Eliminar de favoritos">{{ myGame.codigo }}</p>
 
     </div>
 </template>
 <script>
-
+import { mapState } from 'vuex';
+import axios from 'axios';
+import Global from '../global';
 
 export default {
     name: 'MyGame',
+    computed: {
+        ...mapState("auth", ["iD"]),
+    },
+    data() {
+        return {
+            myGames: [],
+            usuario: {
+                user: null
+            }
+        }
+    },
+    methods: {
+        getMyGames() {
+            this.usuario.user = this.iD;
+            axios.post(Global.url + 'mygames/get', this.usuario)
+                .then(res => {
+                    console.log(res.data);
+                    this.myGames = res.data;
+                })
+        },
+    },
+    mounted(){
+        this.getMyGames();
+    }
 }
 
 </script>
@@ -51,12 +77,12 @@ export default {
 }
 
 
-.my-games p{
+.my-games p {
     font-size: 30px;
     margin-left: auto;
     margin-right: 30px;
-    
-    
+
+
 }
 
 
