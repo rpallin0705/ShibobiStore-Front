@@ -26,7 +26,8 @@
                 </div>
                 <div class="shopping">-
                     <a @click="addFavGames" class="cart"><span class="material-symbols-outlined">favorite</span></a>
-                    <a href="·" class="buy-now">Comprar ahora</a>
+                    <RouterLink @click="compra" :to="{ name: 'buy', params: { nombre: juego.nombre } }" class="buy-now">
+                        Comprar ahora</RouterLink>
                 </div>
             </div>
 
@@ -71,17 +72,25 @@ export default {
                 });
         },
         addFavGames() {
-            this.userData.game = this.juego.id;
-            this.userData.user = this.iD;
-            console.log(this.userData);
-            axios.post(Global.url + 'fav-games', this.userData)
-                .then(() => {
-                    swal("Juego añadido", this.juego.nombre + 'Añadido de tu lista de favoritos', "success");
-                }).catch(error => {
-                swal("El juego ya está en tu lista", error.response.data, "error");
-            });
+            if (this.iD == null) {
+                this.$router.push('/login');
+            } else {
+                this.userData.game = this.juego.id;
+                this.userData.user = this.iD;
+                console.log(this.userData);
+                axios.post(Global.url + 'fav-games', this.userData)
+                    .then(() => {
+                        swal("Juego añadido", this.juego.nombre + 'Añadido de tu lista de favoritos', "success");
+                    }).catch(error => {
+                        swal("El juego ya está en tu lista", error.response.data, "error");
+                    });
+            }
 
-
+        },
+        compra() {
+            if (this.iD == null) {
+                this.$router.push('/login');
+            }
         }
     },
     components: { MainHeader }
