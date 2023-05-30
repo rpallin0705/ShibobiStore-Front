@@ -1,46 +1,4 @@
 <template>
-  <!--<header>
-    <div class="head">
-      <img src="../assets/logo_texto.png">
-
-      <div class="box" v-show="$route.path === '/store'">
-        <input type="checkbox" id="check">
-        <div class="search-box">
-          <input type="text" placeholder="Type here...">
-          <label for="check" class="icon">
-            <span class="material-symbols-outlined">
-              search
-            </span>
-          </label>
-        </div>
-      </div>
-
-      <nav>
-        <input type="checkbox" id="checknav">
-        <label for="checknav" class="checkbtn">
-
-
-          <span class="material-symbols-outlined">
-            menu
-          </span>
-        </label>
-        <ul>
-          <li>
-            <RouterLink to="/" active-class="active">Home</RouterLink>
-          </li>
-          <li>
-            <RouterLink to="/store" active-class="active">Shop</RouterLink>
-          </li>
-          <li>
-            <RouterLink to="log-in" active-class="active">Login</RouterLink>
-          </li>
-          <li>
-            <RouterLink to="/sign-up" active-class="active">SignUp</RouterLink>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>-->
   <header>
     <div class="container">
       <img src="../assets/logo_texto.png" class="logo">

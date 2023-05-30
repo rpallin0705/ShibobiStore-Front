@@ -12,7 +12,7 @@
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required v-model="userData.password">
+                        <input type="password" required v-model="userData.password" >
                         <label for="">Password</label>
                     </div>
                     <div class="forget">
@@ -60,7 +60,7 @@ export default {
                 this.setUser(res.data.username);
                 this.setUseriD(res.data.id);
                 this.setUserEmail(res.data.email);
-                this.$router.push("home");
+                this.$router.go(-1);
             }).catch(error => {
                 swal("Sesión fallida", error.response.data, "error");
             });

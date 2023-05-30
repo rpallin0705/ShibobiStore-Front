@@ -72,12 +72,11 @@ export default {
                 });
         },
         addFavGames() {
-            if (this.iD == null) {
+            if (!localStorage.getItem('id')) {
                 this.$router.push('/login');
             } else {
                 this.userData.game = this.juego.id;
                 this.userData.user = this.iD;
-                console.log(this.userData);
                 axios.post(Global.url + 'fav-games', this.userData)
                     .then(() => {
                         swal("Juego añadido", this.juego.nombre + 'Añadido de tu lista de favoritos', "success");
@@ -88,7 +87,7 @@ export default {
 
         },
         compra() {
-            if (this.iD == null) {
+            if (!localStorage.getItem('id')) {
                 this.$router.push('/login');
             } else {
                 this.$router.push({ name: 'buy', params: { nombres: this.juego.nombre } });

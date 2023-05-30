@@ -7,7 +7,7 @@
                     <h2>Join our army</h2>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">person</span>
-                        <input type="email" required v-model="userData.email">
+                        <input type="text" required v-model="userData.email" pattern="(.*@gmail}">
                         <label for="">Email</label>
                     </div>
                     <div class="inputbox">
@@ -17,7 +17,8 @@
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required v-model="userData.password">
+                        <input type="password" required v-model="userData.password" pattern="(?=.*[A-Z]).{8,}"
+                            title="La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula.">
                         <label for="">Password</label>
                     </div>
                     <button>Sign up</button>
@@ -51,11 +52,11 @@ export default {
         singup() {
             axios.post(Global.url + "users/sing-up", this.userData)
                 .then(() => {
-                swal("Registro completado", "Bienvenido a shinobi store", "success");
-                this.$router.push("login");
-            }).catch(error => {
-                swal("Error de registro", error.response.data, "error");
-            });
+                    swal("Registro completado", "Bienvenido a shinobi store", "success");
+                    this.$router.push("login");
+                }).catch(error => {
+                    swal("Error de registro", error.response.data, "error");
+                });
         }
     },
     components: { MainHeader }
