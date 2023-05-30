@@ -26,8 +26,8 @@
                 </div>
                 <div class="shopping">-
                     <a @click="addFavGames" class="cart"><span class="material-symbols-outlined">favorite</span></a>
-                    <RouterLink @click="compra" :to="{ name: 'buy', params: { nombre: juego.nombre } }" class="buy-now">
-                        Comprar ahora</RouterLink>
+                    <a @click="compra" class="buy-now">
+                        Comprar ahora</a>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@ export default {
             userData: {
                 user: null,
                 game: null
-            }
+            },
         };
     },
     computed: {
@@ -90,6 +90,8 @@ export default {
         compra() {
             if (this.iD == null) {
                 this.$router.push('/login');
+            } else {
+                this.$router.push({ name: 'buy', params: { nombres: this.juego.nombre } });
             }
         }
     },
@@ -140,7 +142,7 @@ section {
 }
 
 .product-info {
-    width: 30%;
+    width: 40%;
     max-width: 40%;
     box-sizing: border-box;
     background: rgba(0, 0, 0, 0.281);
@@ -205,7 +207,7 @@ section {
 }
 
 .new-price {
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .shopping {

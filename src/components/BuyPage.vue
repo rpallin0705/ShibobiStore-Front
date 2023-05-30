@@ -20,7 +20,8 @@
                 <div class="name-container">
                     <label for="numero-tarjeta">Nombre:</label>
                     <input type="text" id="name-text" name="name-text" maxlength="30" placeholder="JUAN PALOMO" required
-                        onkeypress="return(event.charCode > 64 && event.charCode < 91 )|| (event.charCode >96 && event.charCode <123) || event.key == ' '" v-model="tarjeta.nombre">
+                        onkeypress="return(event.charCode > 64 && event.charCode < 91 )|| (event.charCode >96 && event.charCode <123) || event.key == ' '"
+                        v-model="tarjeta.nombre">
                 </div>
                 <div class="infos-container">
                     <div class="expiration-container">
@@ -65,20 +66,19 @@ export default {
             tarjeta: {
                 numero: null,
                 nombre: null,
-                fecha:null,
+                fecha: null,
                 cvv: null,
             }
 
         }
     },
     mounted() {
-        console.log("hola");
         this.getPrecio();
     },
     methods: {
         getPrecio() {
 
-            const nombre = this.$route.params.nombre;
+            const nombre = this.$route.params.nombres;
             axios.post(Global.url + "games/" + nombre)
                 .then(response => {
                     // La respuesta del servidor
