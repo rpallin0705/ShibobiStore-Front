@@ -6,7 +6,7 @@
         <h2>{{ myGame.game.nombre }}</h2>
         <h1>{{ myGame.game.precio - myGame.game.precio * myGame.game.descuento / 100 + "$" }}</h1>
 
-        <p title="Eliminar de favoritos">{{ myGame.codigo }}</p>
+        <p>{{ myGame.codigo }}</p>
 
     </div>
 </template>
@@ -78,9 +78,15 @@ export default {
 
 
 .my-games p {
-    font-size: 30px;
+    font-size: 1.1em;
     margin-left: auto;
     margin-right: 30px;
+
+
+}
+.my-games p {
+    font-size: 1.1em;
+   
 
 
 }

@@ -12,7 +12,8 @@
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="text" required v-model="userData.username">
+                        <input type="text" required v-model="userData.username" pattern="[a-zA-Z0-9._%+-]+@gmail.com$"
+                            title="Por favor, ingresa un correo de Gmail válido">
                         <label for="">Username</label>
                     </div>
                     <div class="inputbox">

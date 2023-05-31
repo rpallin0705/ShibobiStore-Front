@@ -9,13 +9,13 @@
     </div>
     <div class="pago">
         <div class="formulario">
-            <form id="credit-card" @submit.prevent="addTarjeta()">
+            <form id="credit-card" @submit.prevent="createTarjeta()">
                 <div class="number-container">
                     <label for="numero-tarjeta">Número de tarjeta:</label>
                     <input type="text" id="numero-tarjeta" name="numero-tarjeta" maxlength="19"
                         placeholder="1234-5678-9101-1121" required
                         onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode === 45"
-                        pattern="\d{4}-\d{4}-\d{4}-\d{4}" v-model="tarjeta.numero">
+                        pattern="\d{4}-\d{4}-\d{4}-\d{4}" v-model="tarjeta.n_tarjeta">
                 </div>
                 <div class="name-container">
                     <label for="numero-tarjeta">Nombre:</label>
@@ -27,7 +27,7 @@
                     <div class="expiration-container">
                         <label for="numero-tarjeta">Fecha exp.</label>
                         <input type="text" id="valid-thru-text" name="valid-thru-text" maxlength="5" placeholder="MM/YY"
-                            required pattern="(0[1-9]|1[0-2])\/\d{2}" v-model="tarjeta.fecha">
+                            required pattern="(0[1-9]|1[0-2])\/\d{2}" v-model="tarjeta.f_caducidad">
                     </div>
                     <div class="cvv-container">
                         <label for="numero-tarjeta">CVV</label>
@@ -42,20 +42,24 @@
         </div>
         <div class="select-card">
             <form class="cards">
-                <div class="card">
-                    <input type="radio" name="row1" value="option1">
-                    <p>Tarjeta terminada en...</p>
-                    <p>...XXXX</p>
+                <div class="card" v-for="tarjetas in tarjetas" :key="tarjetas.id">
+                    <input @click="tarjeta_seleccionada = 1" type="radio" name="row1" value="option1">
+                    <p>Tarjeta terminada en... </p>
+                    <p>{{ tarjetas.n_tarjeta.slice(-4) }}</p>
                 </div>
+
             </form>
-            <input type="submit" value="Realizar Pago">
+            <input @click="realizarPago()" type="submit" value="Realizar Pago">
+
         </div>
     </div>
 </template>
 <script>
 import MainHeader from './MainHeader.vue';
 import axios from 'axios';
+import swal from 'sweetalert';
 import Global from '@/global';
+import CustomIcon from '@/assets/swal_icon.png'
 
 export default {
     name: "BuyPage",
@@ -63,17 +67,27 @@ export default {
     data() {
         return {
             juego: [],
+            tarjetas: [],
             tarjeta: {
-                numero: null,
+                user: null,
+                n_tarjeta: null,
                 nombre: null,
-                fecha: null,
+                f_caducidad: null,
                 cvv: null,
+            },
+            tarjeta_seleccionada: null,
+            compra: {
+                user: null,
+                game: null,
             }
 
         }
     },
     mounted() {
         this.getPrecio();
+        this.tarjeta.user = localStorage.getItem("id");
+        this.compra.user = localStorage.getItem("id");
+        this.getTarjeta();
     },
     methods: {
         getPrecio() {
@@ -85,6 +99,63 @@ export default {
                     this.juego = response.data;
                 });
         },
+
+        createTarjeta() {
+            axios.post(Global.url + "tarjetas", this.tarjeta)
+                .then(response => {
+                    console.log(response.data);
+                    swal(
+                        'Tarjeta Creada',
+                        'Tú tarjeta se ha creado correctamente',
+                        'success'
+                    );
+                    this.getTarjeta();
+                }).catch(error => {
+                    swal(
+                        'Tarjeta existente',
+                        error.response.data,
+                        'error',
+                    )
+                });
+        },
+        getTarjeta() {
+
+            axios.get(Global.url + "tarjetas/" + this.tarjeta.user)
+                .then(response => {
+                    // La respuesta del servidor
+                    this.tarjetas = response.data;
+                });
+        },
+
+        realizarPago() {
+
+            if (this.tarjeta_seleccionada) {
+                this.compra.game = this.juego.id;
+                console.log(this.compra.game);
+                axios.post(Global.url + 'mygames', this.compra).then(response => {
+                    console.log(response.data);
+                    swal(
+                        'Su compra ha sido realizada',
+                        'Muchas gracias por comprar en shinobi store, el código de activación es ' + response.data.codigo,
+                        CustomIcon,
+                    );
+                }).catch(error => {
+                    swal(
+                        'Sentimos las molestias',
+                        'No hay stock de' + this.juego.nombre,
+                        CustomIcon,
+                    );
+                });
+            } else {
+                swal(
+                    'Debes selecionar una tarjeta para realizar el pago',
+                    'Te cress que se paga solo o qué?',
+                    'info',
+                );
+            }
+
+
+        }
     },
     computed: {
         backgroundStyle() {
