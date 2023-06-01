@@ -17,6 +17,7 @@ const routes = [
   { path: '/home', component: HomePage },
   { path: '/store', component: StorePage },
   { path: '/login', component: LogIn },
+  { path: '/login/:token', name: 'login', component: LogIn },
   { path: '/sign-up', component: SignUp },
   { path: '/profile', component: ProfilePage },
   { path: '/game/:nombre', name: 'game', component: GamePage },

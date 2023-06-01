@@ -7,18 +7,18 @@
                     <h2>Join our army</h2>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">person</span>
-                        <input type="text" required v-model="userData.email" pattern="(.*@gmail}">
+                        <input type="text" required v-model="userData.email" pattern="[a-zA-Z0-9._%+-]+@gmail.com$"
+                            title="Por favor, ingresa un correo de Gmail válido">
                         <label for="">Email</label>
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="text" required v-model="userData.username" pattern="[a-zA-Z0-9._%+-]+@gmail.com$"
-                            title="Por favor, ingresa un correo de Gmail válido">
+                        <input type="text" required v-model="userData.username">
                         <label for="">Username</label>
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required v-model="userData.password" pattern="(?=.*[A-Z]).{8,}"
+                        <input type="password" required v-model="userData.passwd" pattern="(?=.*[A-Z]).{8,}"
                             title="La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula.">
                         <label for="">Password</label>
                     </div>
@@ -45,12 +45,13 @@ export default {
             userData: {
                 username: null,
                 email: null,
-                password: null
+                passwd: null
             }
         };
     },
     methods: {
         singup() {
+            console.log(this.userData)
             axios.post(Global.url + "users/sing-up", this.userData)
                 .then(() => {
                     swal("Registro completado", "Bienvenido a shinobi store", "success");

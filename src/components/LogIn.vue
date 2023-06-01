@@ -12,7 +12,7 @@
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required v-model="userData.password" >
+                        <input type="password" required v-model="userData.password">
                         <label for="">Password</label>
                     </div>
                     <div class="forget">
@@ -21,7 +21,7 @@
                     </div>
                     <button>Log in</button>
                     <div class="register">
-                        <p>Not registered?<RouterLink to="sign-up">Join our army</RouterLink>
+                        <p>Not registered?<RouterLink to="/sign-up">Join our army</RouterLink>
                         </p>
                     </div>
                 </form>
@@ -44,10 +44,18 @@ export default {
                 username: "",
                 password: ""
             },
+            token: null,
         };
     },
     computed: {
         ...mapState("auth", ["loggedIn", "userName", "iD"]),
+    },
+
+    mounted() {
+        if (this.$route.params.token) {
+            this.token = this.$route.params.token;
+            this.verification();
+        }
     },
     methods: {
         ...mapMutations("auth", ["setLoggedIn", "setUser", "logout", "setUseriD", "setUserEmail"]),
@@ -55,17 +63,25 @@ export default {
             // Lógica de inicio de sesión
             axios.post(Global.url + "users/login", this.userData)
                 .then(res => {
-                swal("Sesión iniciada", "Las credenciales eran correctas", "success");
-                this.setLoggedIn(true);
-                this.setUser(res.data.username);
-                this.setUseriD(res.data.id);
-                this.setUserEmail(res.data.email);
-                this.$router.go(-1);
-            }).catch(error => {
-                swal("Sesión fallida", error.response.data, "error");
-            });
+                    swal("Sesión iniciada", "Las credenciales eran correctas", "success");
+                    this.setLoggedIn(true);
+                    this.setUser(res.data.username);
+                    this.setUseriD(res.data.id);
+                    this.setUserEmail(res.data.email);
+                    this.$router.push('/store');
+                }).catch(error => {
+                    swal("Sesión fallida", error.response.data, "error");
+                });
             //Después de verificar las credenciales del usuario
         },
+
+        verification() {
+            axios.post(Global.url + "users/verification/" + this.token)
+                .then(() => {
+                    swal("Usuario verificado", "Ya puedes inciar sesión", "success");
+
+                });
+        }
     },
     components: { MainHeader }
 }
