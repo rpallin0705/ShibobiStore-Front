@@ -1,51 +1,28 @@
 <template>
     <MainHeader></MainHeader>
     <section>
-        <div v-if="!recuperarContraseña" class="form-box">
+        <div class="form-box">
             <div class="form-vale">
-                <form @submit.prevent="login()">
-                    <h2>Log in</h2>
+                <form @submit.prevent="verification()">
+                    <h2>Change Password</h2>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">person</span>
-                        <input type="text" required v-model="userData.username">
-                        <label for="">Email</label>
+                        <input type="password" required v-model="userData.password" pattern="(?=.*[A-Z]).{8,}"
+                            title="La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula.">
+                        <label for="">New Password</label>
                     </div>
                     <div class="inputbox">
                         <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required v-model="userData.password">
-                        <label for="">Password</label>
+                        <input type="password" required v-model="repeatPassword">
+                        <label for="">Repeat Password</label>
                     </div>
-                    <div class="forget">
-                        <label for=""><a @click="recuperarContraseña=1" href="#">Forget Password</a></label>
 
-                    </div>
-                    <button>Log in</button>
-                    <div class="register">
-                        <p>Not registered?<RouterLink to="/sign-up">Join our army</RouterLink>
-                        </p>
-                    </div>
+                    <button>Change Password</button>
+
                 </form>
             </div>
         </div>
 
-        <div v-if="recuperarContraseña" class="form-box">
-            <div class="form-vale">
-                <form @submit.prevent="passwdReset()">
-                    <h2>Reset</h2>
-                    <div class="inputbox">
-                        <span class="material-symbols-rounded">person</span>
-                        <input type="text" required v-model="reset">
-                        <label for="">Email</label>
-                    </div>
-                    <div class="forget">
-                        <label for=""><a @click="recuperarContraseña=null" href="#">Log in</a></label>
-
-                    </div>
-                    <button>Send Email</button>
-                   
-                </form>
-            </div>
-        </div>
     </section>
 </template>
 <script>
@@ -56,16 +33,14 @@ import swal from 'sweetalert';
 import MainHeader from './MainHeader.vue';
 
 export default {
-    name: "LogIn",
+    name: "ResetPage",
     data() {
         return {
             userData: {
-                username: "",
-                password: ""
+                password: null
             },
-            token: null,
-            reset: null,
-            recuperarContraseña: null, 
+            repeatPassword: null,
+            token: null
         };
     },
     computed: {
@@ -75,44 +50,28 @@ export default {
     mounted() {
         if (this.$route.params.token) {
             this.token = this.$route.params.token;
-            this.verification();
         }
     },
     methods: {
         ...mapMutations("auth", ["setLoggedIn", "setUser", "logout", "setUseriD", "setUserEmail"]),
-        login() {
-            // Lógica de inicio de sesión
-            axios.post(Global.url + "users/login", this.userData)
-                .then(res => {
-                    swal("Sesión iniciada", "Las credenciales eran correctas", "success");
-                    this.setLoggedIn(true);
-                    this.setUser(res.data.username);
-                    this.setUseriD(res.data.id);
-                    this.setUserEmail(res.data.email);
-                    this.$router.push('/store');
-                }).catch(error => {
-                    swal("Sesión fallida", error.response.data, "error");
-                });
-            //Después de verificar las credenciales del usuario
-        },
+
 
         verification() {
-            axios.post(Global.url + "users/verification/" + this.token)
-                .then(() => {
-                    swal("Usuario verificado", "Ya puedes inciar sesión", "success");
+            if (this.userData.password == this.repeatPassword) {
+                axios.patch(Global.url + "users/passwd/" + this.token, this.userData)
+                    .then(() => {
+                        swal("Contraseña cambiada", "Ya puedes inciar sesión", "success");
+                        this.$router.push('/login');
+                    }).catch(error => {
+                        swal("Contraseña cambiada", error.response.data, "error");
+                    });
+            } else {
+                swal("Las contraseñas no coinciden", "La contraseña deben de ser iguales", "error");
 
-                });
+            }
         },
 
-        passwdReset() {
-            axios.post(Global.url + "users/passwd/" + this.reset)
-                .then(() => {
-                    swal("Email enviado", 'Correo enviado a ' + this.reset, "success");
 
-                }).catch(error => {
-                    swal("Email no encontrado", error.response.data , "error");
-                });
-        }
     },
     components: { MainHeader }
 }
@@ -147,7 +106,6 @@ section {
     justify-content: center;
     align-items: center;
 }
-
 
 
 

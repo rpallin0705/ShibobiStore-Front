@@ -10,6 +10,7 @@ import StorePage from './components/StorePage.vue'
 import ProfilePage from './components/ProfilePage.vue'
 import store from './userHandler'
 import BuyPage from './components/BuyPage.vue'
+import ResetPage from './components/ResetPage.vue'
 
 //Rutas
 const routes = [
@@ -17,6 +18,7 @@ const routes = [
   { path: '/home', component: HomePage },
   { path: '/store', component: StorePage },
   { path: '/login', component: LogIn },
+  { path: '/reset/:token', name: 'reset', component: ResetPage },
   { path: '/login/:token', name: 'login', component: LogIn },
   { path: '/sign-up', component: SignUp },
   { path: '/profile', component: ProfilePage },
