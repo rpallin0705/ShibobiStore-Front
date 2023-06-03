@@ -2,7 +2,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from './components/HomePage.vue'
-//import StorePage from './components/StorePage.vue'
 import LogIn from './components/LogIn.vue'
 import SignUp from './components/SignUp.vue'
 import GamePage from './components/GamePage.vue'
@@ -11,6 +10,7 @@ import ProfilePage from './components/ProfilePage.vue'
 import store from './userHandler'
 import BuyPage from './components/BuyPage.vue'
 import ResetPage from './components/ResetPage.vue'
+import AdminPage from './components/adminview/AdminPage.vue'
 
 //Rutas
 const routes = [
@@ -22,6 +22,7 @@ const routes = [
   { path: '/login/:token', name: 'login', component: LogIn },
   { path: '/sign-up', component: SignUp },
   { path: '/profile', component: ProfilePage },
+  { path: '/shinobi-administration', component: AdminPage },
   { path: '/game/:nombre', name: 'game', component: GamePage },
   { path: '/buy/:nombres', name: 'buy', component: BuyPage },
 ]

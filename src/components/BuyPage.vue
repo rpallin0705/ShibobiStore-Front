@@ -139,7 +139,7 @@ export default {
                         'Muchas gracias por comprar en shinobi store, el código de activación es ' + response.data.codigo,
                         CustomIcon,
                     );
-                }).catch(error => {
+                }).catch(() => {
                     swal(
                         'Sentimos las molestias',
                         'No hay stock de' + this.juego.nombre,
