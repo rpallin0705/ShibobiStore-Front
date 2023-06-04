@@ -1,30 +1,85 @@
 <template>
-    <aside>
-        <img class="logo" src="@/assets/swal_icon.png">
-        <div class="section"><span class="material-symbols-outlined">person</span>Users</div>
-        <div class="section"><span class="material-symbols-outlined">store</span>Games</div>
-        <div class="section logout"><span class="material-symbols-outlined">logout</span>Logout</div>
-    </aside>
+    <div class="pagina">
+        <aside>
+            <img class="logo" src="@/assets/swal_icon.png">
+            <div class="section"><span class="material-symbols-outlined">person</span>Users</div>
+            <div class="section"><span class="material-symbols-outlined">store</span>Games</div>
+            <div class="section logout"><span class="material-symbols-outlined">logout</span>Logout</div>
+        </aside>
+        <section>
+
+            <div class="contenido">
+                <UsersAdmin :usuarios="users"></UsersAdmin>
+            </div>
+        </section>
+    </div>
 </template>
 
 <script>
+import axios from 'axios';
+import UsersAdmin from './UsersAdmin.vue';
+import Global from '@/global';
+
 export default {
-    name: 'AdminPage',
+    name: "AdminPage",
+    components: { UsersAdmin },
+    data() {
+        return {
+            users: []
+        }
+    },
+    methods: {
+        getUsers() {
+            axios.get(Global.url + 'users')
+                .then(response => {
+                    this.users = response.data;
+                    console.log(this.users)
+                }).catch(error=>{
+                    console.log(error.response.data);
+                })
+        }
+    },
+    mounted(){
+        this.getUsers();
+    }
 }
 
 </script>
 
-<style>
+<style scoped>
+.pagina {
+    background: rgba(0, 0, 0, 0.843);
+
+}
+
+
+.contenido {
+    position: relative;
+    left: 22vh;
+    width: calc(100% - 22vh);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+
+
 aside {
     position: absolute;
     width: 10vh;
     height: 100vh;
-    background: whitesmoke;
+    background: rgb(255, 85, 0);
     display: flex;
+    border-radius: 0 20px 20px 0;
     flex-direction: column;
     overflow: hidden;
     transition: .4s all;
+    z-index: 1000;
 }
+
+
 
 aside:hover {
     width: 22vh;
@@ -62,6 +117,6 @@ aside:hover {
 
 
 .section:hover {
-    background: rgb(228, 218, 218);
+    background: rgb(255, 150, 63);
 }
 </style>
