@@ -159,6 +159,8 @@ aside img {
     font-size: 25px;
     color: white;
     display: flex;
+    overflow:hidden;
+    overflow-wrap: break-word;
     flex-direction: column;
     align-items: center;
     gap: 20px;

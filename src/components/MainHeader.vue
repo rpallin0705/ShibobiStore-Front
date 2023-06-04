@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="container">
-      <img  v-if="!(isMediaQueryMatched && $route.path === '/store')" src="../assets/logo_texto.png" class="logo">
+      <img v-show="shouldShowElement" src="../assets/logo_texto.png" class="logo">
 
 
       <slot></slot>
@@ -47,9 +47,19 @@ export default {
   name: "MainHeader",
   computed: {
     ...mapState('auth', ['loggedIn']),
-    isMediaQueryMatched() {
-      return window.matchMedia("(max-width: 767px)").matches;
-    }
+
+  },
+  data() {
+    return {
+      shouldShowElement: true
+    };
+  },
+  created() {
+    this.checkWindowSize();
+    window.addEventListener('resize', this.checkWindowSize);
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.checkWindowSize);
   },
   methods: {
     ...mapMutations('auth', ['logout']),
@@ -62,6 +72,16 @@ export default {
       )
       this.$router.push('login');
     },
+    checkWindowSize() {
+      const isStoreRoute = this.$route.path;
+      const isScreenLarge = window.innerWidth >= 767;
+
+      if ((isStoreRoute == '/store' || isStoreRoute == '/') && !isScreenLarge) {
+        this.shouldShowElement = false;
+      } else {
+        this.shouldShowElement = true;
+      }
+    }
   },
   components: { RouterLink }
 };
@@ -141,11 +161,5 @@ a.active,
 a:hover {
   background-color: rgb(255, 115, 0);
   transition: .5s;
-}
-
-
-
-@media only screen and (max-width: 767px) {
-  
 }
 </style>

@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from './components/HomePage.vue'
 import LogIn from './components/LogIn.vue'
 import SignUp from './components/SignUp.vue'
 import GamePage from './components/GamePage.vue'
@@ -14,8 +13,7 @@ import AdminPage from './components/adminview/AdminPage.vue'
 
 //Rutas
 const routes = [
-  { path: '/', component: HomePage },
-  { path: '/home', component: HomePage },
+  { path: '/', component: StorePage },
   { path: '/store', component: StorePage },
   { path: '/login', component: LogIn },
   { path: '/reset/:token', name: 'reset', component: ResetPage },

@@ -87,4 +87,17 @@ p span {
 .product:hover {
   transform: scale(1.1);
 }
+
+@media only screen and (max-width: 767px) {
+  .product {
+    width: 400px;
+    height: 200px;
+    margin-left: 20px;
+    font-size: 1em;
+  }
+
+  h2 {
+  font-size: 1.3em;
+}
+}
 </style>
