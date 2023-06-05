@@ -1,52 +1,57 @@
 <template>
-    <MainHeader></MainHeader>
-    <section>
-        <div v-if="!recuperarContraseña" class="form-box">
-            <div class="form-vale">
-                <form @submit.prevent="login()">
-                    <h2>Log in</h2>
-                    <div class="inputbox">
-                        <span class="material-symbols-rounded">person</span>
-                        <input type="text" required v-model="userData.username">
-                        <label for="">Email</label>
-                    </div>
-                    <div class="inputbox">
-                        <span class="material-symbols-rounded">lock</span>
-                        <input type="password" required v-model="userData.password">
-                        <label for="">Password</label>
-                    </div>
-                    <div class="forget">
-                        <label for=""><a @click="recuperarContraseña=1" href="#">Forget Password</a></label>
+    <div v-if="logged == null">
+        <MainHeader></MainHeader>
+        <section>
+            <div v-if="!recuperarContraseña" class="form-box">
+                <div class="form-vale">
+                    <form @submit.prevent="login()">
+                        <h2>Log in</h2>
+                        <div class="inputbox">
+                            <span class="material-symbols-rounded">person</span>
+                            <input type="text" required v-model="userData.username">
+                            <label for="">Email</label>
+                        </div>
+                        <div class="inputbox">
+                            <span class="material-symbols-rounded">lock</span>
+                            <input type="password" required v-model="userData.password">
+                            <label for="">Password</label>
+                        </div>
+                        <div class="forget">
+                            <label for=""><a @click="recuperarContraseña = 1" href="#">Forget Password</a></label>
 
-                    </div>
-                    <button>Log in</button>
-                    <div class="register">
-                        <p>Not registered?<RouterLink to="/sign-up">Join our army</RouterLink>
-                        </p>
-                    </div>
-                </form>
+                        </div>
+                        <button>Log in</button>
+                        <div class="register">
+                            <p>Not registered?<RouterLink to="/sign-up">Join our army</RouterLink>
+                            </p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <div v-if="recuperarContraseña" class="form-box">
-            <div class="form-vale">
-                <form @submit.prevent="passwdReset()">
-                    <h2>Reset</h2>
-                    <div class="inputbox">
-                        <span class="material-symbols-rounded">person</span>
-                        <input type="text" required v-model="reset">
-                        <label for="">Email</label>
-                    </div>
-                    <div class="forget">
-                        <label for=""><a @click="recuperarContraseña=null" href="#">Log in</a></label>
+            <div v-else-if="recuperarContraseña" class="form-box">
+                <div class="form-vale">
+                    <form @submit.prevent="passwdReset()">
+                        <h2>Reset</h2>
+                        <div class="inputbox">
+                            <span class="material-symbols-rounded">person</span>
+                            <input type="text" required v-model="reset">
+                            <label for="">Email</label>
+                        </div>
+                        <div class="forget">
+                            <label for=""><a @click="recuperarContraseña = null" href="#">Log in</a></label>
 
-                    </div>
-                    <button>Send Email</button>
-                   
-                </form>
+                        </div>
+                        <button>Send Email</button>
+
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+
+
+        </section>
+    </div>
+    <ErrorPage v-else></ErrorPage>
 </template>
 <script>
 import { mapState, mapMutations } from 'vuex';
@@ -54,6 +59,7 @@ import axios from 'axios';
 import Global from '@/global';
 import swal from 'sweetalert';
 import MainHeader from './MainHeader.vue';
+import ErrorPage from './ErrorPage.vue';
 
 export default {
     name: "LogIn",
@@ -65,7 +71,9 @@ export default {
             },
             token: null,
             reset: null,
-            recuperarContraseña: null, 
+            recuperarContraseña: null,
+            logged: null,
+
         };
     },
     computed: {
@@ -77,10 +85,13 @@ export default {
             this.token = this.$route.params.token;
             this.verification();
         }
+        this.logged = localStorage.getItem('sesionIniciada');
+
     },
     methods: {
-        ...mapMutations("auth", ["setLoggedIn", "setUser", "logout", "setUseriD", "setUserEmail"]),
+        ...mapMutations("auth", ["setLoggedIn", "setUser", "logout", "setUseriD", "setUserEmail", "setSysMaster"]),
         login() {
+
             // Lógica de inicio de sesión
             axios.post(Global.url + "users/login", this.userData)
                 .then(res => {
@@ -89,7 +100,13 @@ export default {
                     this.setUser(res.data.username);
                     this.setUseriD(res.data.id);
                     this.setUserEmail(res.data.email);
-                    this.$router.push('/store');
+                    this.setSysMaster(res.data.sysadmin);
+                    if (res.data.sysadmin) {
+                        this.$router.push('/shinobi-administration');
+
+                    } else {
+                        this.$router.push('/store');
+                    }
                 }).catch(error => {
                     swal("Sesión fallida", error.response.data, "error");
                 });
@@ -110,11 +127,11 @@ export default {
                     swal("Email enviado", 'Correo enviado a ' + this.reset, "success");
 
                 }).catch(error => {
-                    swal("Email no encontrado", error.response.data , "error");
+                    swal("Email no encontrado", error.response.data, "error");
                 });
         }
     },
-    components: { MainHeader }
+    components: { MainHeader, ErrorPage }
 }
 </script>
 

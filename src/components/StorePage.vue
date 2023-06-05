@@ -32,6 +32,7 @@ import ProductContainer from '../components/ProductContainer.vue';
 import MainHeader from './MainHeader.vue';
 import ErrorPage from './ErrorPage.vue';
 
+
 export default {
     name: 'StorePage',
     components: {
@@ -47,7 +48,10 @@ export default {
     },
     mounted() {
         this.getJuegos();
+
+
     },
+
     methods: {
         getJuegos() {
             axios.get(this.url + "games")
@@ -55,6 +59,11 @@ export default {
                     this.juegos = res.data;
 
                 })
+        },
+        isSysmaster() {
+            if (this.sysmaster != null) {
+                this.$router.push('/shinobi-administration');
+            }
         }
     }
 

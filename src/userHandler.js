@@ -11,6 +11,7 @@ const store = createStore({
         userName: null,
         iD: null,
         email: null,
+        sysmaster: null,
       },
       mutations: {
         setLoggedIn(state, loggedIn) {
@@ -30,18 +31,23 @@ const store = createStore({
           state.email = correo;
           localStorage.setItem('correo', correo);
         },
+        setSysMaster(state, sysmaster) {
+          state.sysmaster = sysmaster;
+        },
 
         logout(state) {
           state.userName = null;
           state.email = null;
           state.loggedIn = false;
-          state.correo = null
+          state.correo = null;
+          state.sysmaster = null;
 
 
           localStorage.removeItem('sesionIniciada');
           localStorage.removeItem('username');
           localStorage.removeItem('id');
           localStorage.removeItem('correo');
+
         }
 
       },

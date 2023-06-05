@@ -1,5 +1,5 @@
 <template>
-    <div class="pagina">
+    <div v-if="sysmaster != null" class="pagina">
         <aside>
             <img class="logo" src="@/assets/swal_icon.png">
             <div class="section"><span class="material-symbols-outlined">person</span>Users</div>
@@ -13,16 +13,20 @@
             </div>
         </section>
     </div>
+    <ErrorPage v-else></ErrorPage>
 </template>
 
 <script>
 import axios from 'axios';
 import UsersAdmin from './UsersAdmin.vue';
 import Global from '@/global';
+import { mapState } from 'vuex';
+import ErrorPage from '../ErrorPage.vue';
+import CustomIcon from '@/assets/swal_icon.png'
 
 export default {
     name: "AdminPage",
-    components: { UsersAdmin },
+    components: { UsersAdmin, ErrorPage },
     data() {
         return {
             users: []
@@ -34,14 +38,26 @@ export default {
                 .then(response => {
                     this.users = response.data;
                     console.log(this.users)
-                }).catch(error=>{
+                }).catch(error => {
                     console.log(error.response.data);
                 })
         }
     },
-    mounted(){
+    mounted() {
+        console.log(this.sysmaster)
+        if (this.sysmaster) {
+            swal(
+                'Bienvenido Administrador',
+                '',
+                CustomIcon
+            )
+        }
         this.getUsers();
-    }
+    },
+    computed: {
+        ...mapState("auth", ["sysmaster"]),
+    },
+
 }
 
 </script>
