@@ -1,23 +1,27 @@
 <template>
-    <MainHeader>
-        <div class="box">
-            <input type="checkbox" id="check">
-            <div class="search-box">
-                <input type="text" placeholder="Type here...">
-                <label for="check" class="icon">
-                    <span class="material-symbols-outlined">
-                        search
-                    </span>
-                </label>
+    <div v-if="juegos">
+        <MainHeader>
+            <div class="box">
+                <input type="checkbox" id="check">
+                <div class="search-box">
+                    <input type="text" placeholder="Type here...">
+                    <label for="check" class="icon">
+                        <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </label>
+                </div>
             </div>
-        </div>
-    </MainHeader>
-    <section class="tienda">
-        <div class="productos" id="productos">
-            <ProductContainer :juegos="juegos"></ProductContainer>
-        </div>
+        </MainHeader>
+        <section class="tienda">
+            <div class="productos" id="productos">
+                <ProductContainer :juegos="juegos"></ProductContainer>
+            </div>
 
-    </section>
+        </section>
+    </div>
+
+    <ErrorPage v-if="!juegos"></ErrorPage>
 </template>
 
 
@@ -26,16 +30,18 @@ import Global from '../global';
 import axios from "axios";
 import ProductContainer from '../components/ProductContainer.vue';
 import MainHeader from './MainHeader.vue';
+import ErrorPage from './ErrorPage.vue';
 
 export default {
     name: 'StorePage',
     components: {
         ProductContainer,
-        MainHeader
+        MainHeader,
+        ErrorPage
     },
     data() {
         return {
-            juegos: [],
+            juegos: null,
             url: Global.url
         }
     },
@@ -139,7 +145,6 @@ export default {
 }
 
 #check {
-  display: none;
+    display: none;
 }
-
 </style>

@@ -21,8 +21,10 @@
                     <img src="../assets/user1.png">
                     <button>Cambiar</button>
 
-                    <p>Username: {{ userName }}</p>
-                    <p>Correo: {{ email }}</p>
+                    <p>Username:</p>
+                    <p>{{ userName }}</p>
+                    <p>Correo: </p>
+                    <p>{{ email }}</p>
 
                     <button @click="log_out" class="logout">Cerrar Sesión</button>
                 </div>
@@ -156,10 +158,10 @@ aside img {
     height: 70%;
     background-color: rgb(226, 93, 3);
     border-radius: 60px;
-    font-size: 25px;
+    font-size: 20px;
     color: white;
     display: flex;
-    overflow:hidden;
+    overflow: hidden;
     overflow-wrap: break-word;
     flex-direction: column;
     align-items: center;

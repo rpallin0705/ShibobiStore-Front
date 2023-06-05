@@ -19,7 +19,7 @@
                 </div>
                 <div class="name-container">
                     <label for="numero-tarjeta">Nombre:</label>
-                    <input type="text" id="name-text" name="name-text" maxlength="30" placeholder="JUAN PALOMO" required
+                    <input type="text" id="name-text" name="name-text" maxlength="50" placeholder="JUAN PALOMO" required
                         onkeypress="return(event.charCode > 64 && event.charCode < 91 )|| (event.charCode >96 && event.charCode <123) || event.key == ' '"
                         v-model="tarjeta.nombre">
                 </div>
@@ -45,7 +45,7 @@
                 <div class="card" v-for="tarjetas in tarjetas" :key="tarjetas.id">
                     <input @click="tarjeta_seleccionada = 1" type="radio" name="row1" value="option1">
                     <p>Tarjeta terminada en... </p>
-                    <p>{{ tarjetas.n_tarjeta.slice(-4) }}</p>
+                    <p>{{ tarjetas.last_digits }}</p>
                 </div>
 
             </form>
@@ -136,7 +136,7 @@ export default {
                     console.log(response.data);
                     swal(
                         'Su compra ha sido realizada',
-                        'Muchas gracias por comprar en shinobi store, el código de activación es ' + response.data.codigo,
+                        'Muchas gracias por comprar en shinobi store, el código de activación se ha enviado a su correo.',
                         CustomIcon,
                     );
                 }).catch(() => {

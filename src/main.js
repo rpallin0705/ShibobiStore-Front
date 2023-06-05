@@ -10,10 +10,11 @@ import store from './userHandler'
 import BuyPage from './components/BuyPage.vue'
 import ResetPage from './components/ResetPage.vue'
 import AdminPage from './components/adminview/AdminPage.vue'
-
+import ErrorPage from './components/ErrorPage.vue'
 //Rutas
 const routes = [
   { path: '/', component: StorePage },
+  { path: '/:catchAll(.*)', name: 'Error404', component: ErrorPage },
   { path: '/store', component: StorePage },
   { path: '/login', component: LogIn },
   { path: '/reset/:token', name: 'reset', component: ResetPage },
