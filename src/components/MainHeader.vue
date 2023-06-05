@@ -9,9 +9,6 @@
       <nav>
         <ul>
           <li>
-            <RouterLink to="/" active-class="active"><span class="material-symbols-outlined">Home</span></RouterLink>
-          </li>
-          <li>
             <RouterLink to="/store" active-class="active">
               <span class="material-symbols-outlined">Shop</span>
             </RouterLink>

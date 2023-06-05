@@ -1,26 +1,52 @@
 <template>
-    <div class="pagina" v-if="juego">
-        <MainHeader></MainHeader>
+    <div :class="{
+        'pagina': anchoPantalla > 1224,
+        'pagina-movil': anchoPantalla <= 1224
+    }" v-if="juego">
+        <MainHeader :class="{
+            'movil': anchoPantalla <= 1224
+        }"></MainHeader>
 
-        <div class="foto-slider">
+        <div :class="{
+            'foto-slider': anchoPantalla > 1224,
+            'foto-slider-movil': anchoPantalla <= 1224
+        }">
             <img :src="juego.image_port">
         </div>
-        <div class="items">
-            <img class="item" :src="juego.image">
-            <div class="product-info">
-                <div class="info">
+        <div :class="{
+            'items': anchoPantalla > 1224,
+            'items-movil': anchoPantalla <= 1224
+        }">
+            <img :class="{
+                'item': anchoPantalla > 1224,
+                'item-movil': anchoPantalla <= 1224
+            }" :src="juego.image">
+            <div :class="{
+                'product-info': anchoPantalla > 1224,
+                'product-info-movil': anchoPantalla <= 1224
+            }">
+                <div :class="{
+                    'info': anchoPantalla > 1224,
+                    'info-movil': anchoPantalla <= 1224
+                }">
                     <h3>{{ juego.nombre }} </h3>
                     <img v-if="juego.plataforma == 'PC'" src="../assets/pc.png">
                     <img v-if="juego.plataforma == 'Nintendo Switch'" src="../assets/nintendo.png">
                     <img v-if="juego.plataforma == 'PlayStation'" src="../assets/ps.png">
                     <img v-if="juego.plataforma == 'Xbox'" src="../assets/xbox.png">
                 </div>
-                <div class="sub-info">
+                <div :class="{
+                    'sub-info': anchoPantalla > 1224,
+                    'sub-info-movil': anchoPantalla <= 1224
+                }">
                     <h2 v-if="juego.n_stock >= 10">En stock</h2>
                     <h2 v-if="juego.n_stock < 10 && juego.n_stock != 0">Pocas unidades en stock</h2>
                     <h2 v-if="juego.n_stock == 0">Sin stock</h2>
                 </div>
-                <div class="precios">
+                <div :class="{
+                    'precios': anchoPantalla > 1224,
+                    'precios-movil': anchoPantalla <= 1224
+                }">
                     <span class="old-price">{{ juego.precio }}$</span>
                     <span class="discount">{{ juego.descuento }}%</span>
                     <span class="new-price">{{ juego.precio -
@@ -34,7 +60,10 @@
             </div>
 
         </div>
-        <div class="desc">
+        <div :class="{
+            'desc': anchoPantalla > 1224,
+            'desc-movil': anchoPantalla <= 1224
+        }">
             <p>{{ juego.descripcion }}
             </p>
         </div>
@@ -43,6 +72,10 @@
 
     <ErrorPage v-else></ErrorPage>
 </template>
+
+
+
+
 
 <script lang="js">
 import axios from 'axios';
@@ -61,6 +94,7 @@ export default {
                 user: null,
                 game: null
             },
+            anchoPantalla: window.innerWidth,
         };
     },
     computed: {
@@ -68,6 +102,10 @@ export default {
     },
     mounted() {
         this.getJuego();
+        window.addEventListener('resize', this.actualizarAnchoPantalla);
+    },
+    beforeUnmount() {
+        window.removeEventListener('resize', this.actualizarAnchoPantalla);
     },
     methods: {
         getJuego() {
@@ -101,12 +139,15 @@ export default {
             } else {
                 this.$router.push({ name: 'buy', params: { nombres: this.juego.nombre } });
             }
+        },
+        actualizarAnchoPantalla() {
+            this.anchoPantalla = window.innerWidth;
+            console.log(this.anchoPantalla);
         }
     },
     components: { MainHeader, ErrorPage }
 }
 </script>
-
 <style scoped>
 .pagina {
     width: 100%;
@@ -123,7 +164,7 @@ export default {
 
 .foto-slider img {
     width: 100%;
-    height: 100%;
+
 }
 
 .items {
@@ -191,6 +232,7 @@ export default {
 
 .shopping {
     width: 100%;
+    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -245,5 +287,103 @@ export default {
     position: relative;
     margin-top: 400px;
 }
-</style>
 
+
+.movil {
+    position: relative;
+    background-color: black;
+}
+
+.pagina-movil {
+    width: 100%;
+    background: rgb(41, 40, 40);
+
+
+}
+
+
+.foto-slider-movil {
+    position: relative;
+    width: 100%;
+
+}
+
+.foto-slider-movil img {
+    width: 100%;
+    height: 30%;
+}
+
+.items-movil {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(49, 48, 48);
+    color: white;
+    top: -20%;
+    font-size: 32px;
+
+}
+
+.item-movil {
+    position: relative;
+    width: 70%;
+    border-radius: 70px;
+    top: -100px;
+
+}
+
+.product-info-movil {
+    width: 90%;
+    position: relative;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-direction: column;
+    top: -90px;
+    background: rgba(0, 0, 0, 0.664);
+    border-radius: 30px;
+
+}
+
+.info-movil {
+    padding: 5px;
+    height: 200px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.sub-info-movil {
+    display: flex;
+    text-align: center;
+}
+
+.info-movil img {
+    width: 100px;
+    top: 10px;
+}
+
+.precios-movil {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+}
+
+.precios-movil span {
+    font-size: 32px;
+}
+
+.desc-movil {
+    justify-content: center;
+    text-align: center;
+    color: wheat;
+    font-size: 34px;
+    position: relative;
+
+}
+</style>
