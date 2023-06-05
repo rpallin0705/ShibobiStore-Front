@@ -34,6 +34,7 @@ export default {
     align-items: center;
     text-align: center;
     background: rgb(26, 25, 25);
+    overflow: hidden;
 
 }
 

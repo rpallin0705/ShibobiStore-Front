@@ -1,8 +1,28 @@
 <template>
-    <div class="usuario" v-for="usuarios in usuarios" :key="usuarios.id">
-        <img src="@/assets/user1.png">
-        <h2>{{ usuarios.username }}</h2>
-        <h2>{{ usuarios.email }}</h2>
+    <div class="usuarios" v-for="usuarios in usuarios" :key="usuarios.id">
+        <div class="usuario">
+            <img src="@/assets/user1.png">
+            <div class="info">
+                <h2>{{ usuarios.username }}</h2>
+            </div>
+            <div class="info">
+                <h2>{{ usuarios.email }}</h2>
+            </div>
+        </div>
+        <form class="formulario" @submit.prevent="">
+
+            <div class="inputbox">
+                <span class="material-symbols-rounded">person</span>
+                <input type="text" :placeholder="usuarios.username">
+            </div>
+            <div class="inputbox">
+                <span class="material-symbols-rounded">email</span>
+                <input type="text" :placeholder="usuarios.email">
+            </div>
+
+            <button>Cambiar</button>
+
+        </form>
     </div>
 </template>
 
@@ -14,31 +34,97 @@ export default {
 
 </script>
 
-<style >
+<style scoped>
+.formulario {
+    display: flex;
+}
+
+.usuarios {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 50px;
+    background: rgb(59, 58, 58);
+    gap: 50px;
+    color: wheat;
+    overflow: hidden;
+    transition: .4s all;
+}
+
 .usuario {
     display: flex;
     align-items: center;
     border-radius: 50px;
-    background:  rgb(59, 58, 58);
-    gap: 200px;
+
+    gap: 50px;
     color: wheat;
-}
-
-.usuario:hover{
-    background: red;
 
 }
 
-.usuario:first-child {
+.formulario {
+    margin-left: 150px;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    text-align: center;
+}
+
+.formulario button {
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    background: orange;
+    border: none;
+    transition: .4s all;
+
+}
+
+.formulario button:hover {
+    transform: scale(1.1);
+
+}
+
+
+.inputbox {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    text-align: center;
+}
+
+.inputbox input {
+    width: 300px;
+    height: 50px;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.material-symbols-rounded {
+    font-size: 50px;
+}
+
+.usuarios:hover {
+    height: 200px;
+}
+
+.info {
+    width: 30%;
+}
+
+
+
+.usuarios:first-child {
     margin-top: 30px;
 }
 
-.usuario:nth-child(odd) {
-    background-color: rgb(59, 58, 58);
+.usuarios:nth-child(odd) {
+    background-color: rgb(94, 89, 89);
 }
 
-.usuario img {
+.usuarios img {
     width: 80px;
+    height: 80px;
     border-radius: 50px;
 }
 </style>

@@ -86,6 +86,9 @@ export default {
             this.verification();
         }
         this.logged = localStorage.getItem('sesionIniciada');
+        if (this.logged != null) {
+            this.$router.push('/store');
+        }
 
     },
     methods: {
@@ -101,6 +104,7 @@ export default {
                     this.setUseriD(res.data.id);
                     this.setUserEmail(res.data.email);
                     this.setSysMaster(res.data.sysadmin);
+                    console.log(localStorage.getItem('master'));
                     if (res.data.sysadmin) {
                         this.$router.push('/shinobi-administration');
 

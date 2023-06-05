@@ -4,7 +4,7 @@
             <div class="box">
                 <input type="checkbox" id="check">
                 <div class="search-box">
-                    <input type="text" placeholder="Type here...">
+                    <input class="input" type="text" placeholder="Type here...">
                     <label for="check" class="icon">
                         <span class="material-symbols-outlined">
                             search
@@ -105,15 +105,15 @@ export default {
     position: relative;
     height: 50px;
     max-width: 50px;
-
     margin-left: auto;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     border-radius: 25px;
-    transition: all 0.3s ease;
+    transition: .5s all;
 }
 
 #check:checked~.search-box {
     max-width: 5000px;
+
 
 
 }
@@ -130,6 +130,8 @@ export default {
     border: none;
     padding-left: 20px;
     font-size: 18px;
+    transition: 0.5s all;
+
 }
 
 .search-box .icon {
@@ -144,7 +146,10 @@ export default {
     text-align: center;
     line-height: 65px;
     border-radius: 25px;
+    transition: 0.5s all;
+
 }
+
 
 #check:checked~.search-box .icon {
     background: rgb(236, 108, 3);

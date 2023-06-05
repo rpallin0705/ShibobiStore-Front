@@ -1,5 +1,5 @@
 <template>
-    <div v-if="sysmaster != null" class="pagina">
+    <div v-if="master != null" class="pagina">
         <aside>
             <img class="logo" src="@/assets/swal_icon.png">
             <div class="section"><span class="material-symbols-outlined">person</span>Users</div>
@@ -20,16 +20,17 @@
 import axios from 'axios';
 import UsersAdmin from './UsersAdmin.vue';
 import Global from '@/global';
-import { mapState } from 'vuex';
 import ErrorPage from '../ErrorPage.vue';
-import CustomIcon from '@/assets/swal_icon.png'
+import CustomIcon from '@/assets/swal_icon.png';
+import swal from 'sweetalert';
 
 export default {
     name: "AdminPage",
     components: { UsersAdmin, ErrorPage },
     data() {
         return {
-            users: []
+            users: [],
+            master: null
         }
     },
     methods: {
@@ -53,9 +54,9 @@ export default {
             )
         }
         this.getUsers();
+        this.master = localStorage.getItem('master');
     },
     computed: {
-        ...mapState("auth", ["sysmaster"]),
     },
 
 }
@@ -119,7 +120,7 @@ aside:hover {
     height: 60px;
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 65px;
     margin-bottom: 10px;
     transition: .4s all;
     font-size: 1.3em;

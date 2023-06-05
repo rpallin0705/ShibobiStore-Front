@@ -29,7 +29,7 @@ export default {
 
 
 
-<style >
+<style scoped>
 .product {
   width: 500px;
   height: 300px;
@@ -97,7 +97,7 @@ p span {
   }
 
   h2 {
-  font-size: 1.3em;
-}
+    font-size: 1.3em;
+  }
 }
 </style>

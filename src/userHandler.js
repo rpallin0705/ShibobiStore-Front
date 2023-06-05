@@ -33,6 +33,8 @@ const store = createStore({
         },
         setSysMaster(state, sysmaster) {
           state.sysmaster = sysmaster;
+          localStorage.setItem('master', sysmaster);
+
         },
 
         logout(state) {
@@ -47,6 +49,8 @@ const store = createStore({
           localStorage.removeItem('username');
           localStorage.removeItem('id');
           localStorage.removeItem('correo');
+          localStorage.removeItem('master');
+
 
         }
 
