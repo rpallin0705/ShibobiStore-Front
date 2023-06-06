@@ -64,7 +64,7 @@ export default {
 .formulario {
     margin-left: 150px;
     display: flex;
-    gap: 60px;
+    gap: 250px;
     align-items: center;
     text-align: center;
 }
@@ -110,6 +110,7 @@ export default {
 
 .info {
     width: 30%;
+    text-align: center;
 }
 
 

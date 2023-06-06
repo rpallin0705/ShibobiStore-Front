@@ -9,7 +9,10 @@
         <section>
 
             <div class="contenido">
-                <UsersAdmin :usuarios="users"></UsersAdmin>
+                <UsersAdmin v-if="1 == 0" :usuarios="users"></UsersAdmin>
+                <div class="juegos">
+                    <img :src="juegos.img" alt="">
+                </div>
             </div>
         </section>
     </div>
@@ -30,6 +33,7 @@ export default {
     data() {
         return {
             users: [],
+            juegos: [],
             master: null
         }
     },
@@ -42,7 +46,15 @@ export default {
                 }).catch(error => {
                     console.log(error.response.data);
                 })
-        }
+        },
+
+        getJuegos() {
+            axios.get(this.url + "games")
+                .then(res => {
+                    this.juegos = res.data;
+
+                })
+        },
     },
     mounted() {
         if (this.sysmaster) {
@@ -63,6 +75,10 @@ export default {
 </script>
 
 <style scoped>
+.juegos {
+    height: 300px;
+}
+
 .pagina {
     background: rgba(0, 0, 0, 0.843);
 
