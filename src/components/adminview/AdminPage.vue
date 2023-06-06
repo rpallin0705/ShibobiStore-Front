@@ -119,7 +119,6 @@ aside:hover {
     height: 60px;
     display: flex;
     align-items: center;
-    text-align: center;
     gap: 65px;
     margin-bottom: 10px;
     transition: .4s all;
