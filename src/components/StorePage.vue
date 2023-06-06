@@ -61,7 +61,7 @@ export default {
                 })
         },
         isSysmaster() {
-            if (this.sysmaster != null) {
+            if (localStorage.getItem('master')) {
                 this.$router.push('/shinobi-administration');
             }
         }

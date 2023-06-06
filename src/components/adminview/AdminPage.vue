@@ -45,7 +45,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.sysmaster)
         if (this.sysmaster) {
             swal(
                 'Bienvenido Administrador',
@@ -120,6 +119,7 @@ aside:hover {
     height: 60px;
     display: flex;
     align-items: center;
+    text-align: center;
     gap: 65px;
     margin-bottom: 10px;
     transition: .4s all;
