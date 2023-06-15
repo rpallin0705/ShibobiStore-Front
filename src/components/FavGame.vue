@@ -7,7 +7,8 @@
         </RouterLink>
         <h1 class="h1">{{ favGame.game.precio - favGame.game.precio * favGame.game.descuento / 100 + "$" }}</h1>
         <div class="iconos">
-            <span @click="this.$router.push({ name: 'buy', params: { nombres: this.favGame.game.nombre } });" title="Comprar" class="material-symbols-outlined">shopping_bag</span>
+            <span @click="this.$router.push({ name: 'buy', params: { nombres: favGame.game.nombre } });"
+                title="Comprar" class="material-symbols-outlined">shopping_bag</span>
             <a title="Eliminar de favoritos" class="material-symbols-outlined"
                 @click="deleteFavGames(favGame.game.id)">delete</a>
         </div>
@@ -28,7 +29,7 @@ export default {
                 user: null,
                 game: null
             },
-            usuario:{
+            usuario: {
                 user: null
             }
         }
@@ -106,7 +107,7 @@ export default {
     transition: 0.4s all;
 }
 
-.h1{
+.h1 {
     font-size: 30px;
 }
 

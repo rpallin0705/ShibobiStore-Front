@@ -20,8 +20,6 @@ export default {
         }, 1000); // Retraso de 1 segundo antes de mostrar el componente
     }
 }
-
-
 </script>
 
 <style scoped>
@@ -37,9 +35,6 @@ export default {
     overflow: hidden;
 
 }
-
-
-
 
 .error img {
 
