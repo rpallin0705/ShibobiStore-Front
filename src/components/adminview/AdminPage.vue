@@ -9,7 +9,7 @@
         <section>
 
             <div class="contenido">
-                <UsersAdmin v-if="1 == 0" :usuarios="users"></UsersAdmin>
+                <UsersAdmin v-if="1 == 1" :usuarios="users"></UsersAdmin>
                 <div class="juegos">
                     <img :src="juegos.img" alt="">
                 </div>
