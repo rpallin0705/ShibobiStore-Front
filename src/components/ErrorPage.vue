@@ -17,7 +17,7 @@ export default {
     mounted() {
         setTimeout(() => {
             this.showComponent = true;
-        }, 1000); // Retraso de 1 segundo antes de mostrar el componente
+        }, 10000); // Retraso de 10 segundo antes de mostrar el componente
     }
 }
 </script>
