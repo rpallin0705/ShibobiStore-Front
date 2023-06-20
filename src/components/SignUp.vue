@@ -54,7 +54,7 @@ export default {
             console.log(this.userData)
             axios.post(Global.url + "users/sing-up", this.userData)
                 .then(() => {
-                    swal("Registro completado", "Bienvenido a shinobi store", "success");
+                    swal("Registro completado", "Se te ha enviado un correo electrónico de verificación", "success");
                     this.$router.push("login");
                 }).catch(error => {
                     swal("Error de registro", error.response.data, "error");

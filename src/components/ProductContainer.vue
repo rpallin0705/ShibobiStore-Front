@@ -54,6 +54,9 @@ export default {
 
 .info {
   padding: 15px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-sizing: border-box;
 
 }
 

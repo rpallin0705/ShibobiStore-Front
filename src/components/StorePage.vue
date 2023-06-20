@@ -15,7 +15,7 @@
         </MainHeader>
         <section class="tienda">
             <div class="productos" id="productos">
-                <ProductContainer :juegos="juegos"></ProductContainer>
+                <ProductContainer class="producto" :juegos="juegos"></ProductContainer>
             </div>
 
         </section>
@@ -161,4 +161,6 @@ export default {
 #check {
     display: none;
 }
+
+
 </style>
